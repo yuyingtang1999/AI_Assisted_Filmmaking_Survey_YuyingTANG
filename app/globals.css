@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+/* ===========================================================================
+   Theme tokens — "Algorithm behind the Lens"
+   Palette sourced from the PQE deck (labor-site & labor-type gradients).
+   =========================================================================== */
+:root {
+  --bg: #07090f;
+  --bg-2: #0b0f19;
+  --panel: #121826;
+  --panel-2: #161d2e;
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --fg: #f5f7fa;
+  --muted: #9aa4b6;
+  --faint: #6b7386;
+
+  /* Labor Sites */
+  --atl-ind: #e05548;
+  --atl-grp: #a05fc0;
+  --btl-ind: #e08a3c;
+  --btl-grp: #2fb28f;
+  --cross: #9aa1ab;
+
+  /* Labor Types */
+  --exec: #d96b45;
+  --struct: #74b47d;
+  --meaning: #5f82d8;
+  --relational: #9784c9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 76px;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--fg);
+  background: var(--bg);
+  font-family: var(--font-sans, ui-sans-serif, system-ui, -apple-system,
+      "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+/* Subtle film-grain overlay across the whole page */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- Typography helpers ---- */
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.section-title {
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
+.lede {
+  color: var(--muted);
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  max-width: 58ch;
+}
+
+/* ---- Reveal-on-scroll ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Hero animations ---- */
+@keyframes codeRain {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+@keyframes filmPan {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+}
+
+.caret::after {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  margin-left: 4px;
+  background: var(--atl-ind);
+  vertical-align: -0.12em;
+  animation: blink 1s step-end infinite;
+}
+
+/* ---- Utility surfaces ---- */
+.card {
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  padding: 3px 10px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* thin scrollbar for drawers */
+.thin-scroll::-webkit-scrollbar { width: 8px; }
+.thin-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.14);
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; }
+}
