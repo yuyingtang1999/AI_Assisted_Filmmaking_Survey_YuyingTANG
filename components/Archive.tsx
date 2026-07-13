@@ -1,18 +1,22 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import {
   PAPERS,
   SITES,
   TYPES,
   siteById,
   typeById,
+  paperImage,
   type Paper,
   type SiteId,
   type LaborType,
 } from "@/lib/data";
 import Reveal from "./Reveal";
+import SectionHeader from "./SectionHeader";
 import PaperDrawer from "./PaperDrawer";
+import { useTilt } from "./hooks";
 
 type GroupMode = "site" | "year" | "none";
 
@@ -68,19 +72,23 @@ export default function Archive() {
   const anyFilter = sites.size || types.size || venues.size;
 
   return (
-    <section id="archive" className="relative mx-auto max-w-6xl px-5 py-24 sm:py-32">
-      <Reveal>
-        <div className="flex items-center gap-3">
-          <span className="chip">The Archive</span>
-          <span className="h-px flex-1 bg-[var(--border)]" />
-        </div>
-        <h2 className="section-title mt-4">Explore All 31 Systems</h2>
-        <p className="lede mt-5">
+    <section id="archive" className="relative mx-auto max-w-6xl px-5 py-28 sm:py-36">
+      <SectionHeader
+        eyebrow="The Archive"
+        num="05"
+        accent="var(--btl-ind)"
+        title={
+          <>
+            Explore all <em>31 systems</em>
+          </>
+        }
+      >
+        <p className="lede">
           The full corpus, playable. Filter by site, labor type, or venue;
           re-group the field; and click any system to open its paper. Colours
           encode the labor site.
         </p>
-      </Reveal>
+      </SectionHeader>
 
       {/* controls */}
       <Reveal delay={70}>
@@ -251,15 +259,37 @@ function Toggle({
 
 function PaperCard({ p, onDetails }: { p: Paper; onDetails: () => void }) {
   const site = siteById(p.site);
+  const img = paperImage(p.id);
+  const tilt = useTilt<HTMLAnchorElement>(5);
   return (
     <a
+      ref={tilt.ref}
+      onMouseMove={tilt.onMove}
+      onMouseLeave={tilt.onLeave}
       href={p.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="card group relative flex flex-col overflow-hidden p-4 transition-all duration-300 hover:-translate-y-1"
-      style={{ borderColor: "var(--border)" }}
+      className="card card-hover group relative flex flex-col overflow-hidden"
+      style={{ borderColor: "var(--border)", transform: tilt.style, transformStyle: "preserve-3d" }}
       title={`Open ${p.name} — opens the paper (DOI) in a new tab`}
     >
+      {img && (
+        <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-[var(--border)]">
+          <Image
+            src={img}
+            alt={`${p.name} system`}
+            fill
+            sizes="(max-width: 640px) 100vw, 360px"
+            style={{ objectFit: "cover" }}
+            className="transition-transform duration-500 group-hover:scale-105"
+          />
+          <span
+            className="absolute inset-x-0 bottom-0 h-10"
+            style={{ background: "linear-gradient(transparent, rgba(10,13,22,0.85))" }}
+          />
+        </div>
+      )}
+      <div className="relative flex flex-1 flex-col p-4">
       <span
         className="absolute inset-y-0 left-0 w-1 transition-all group-hover:w-1.5"
         style={{ background: site.accent }}
@@ -322,6 +352,7 @@ function PaperCard({ p, onDetails }: { p: Paper; onDetails: () => void }) {
         >
           Details
         </button>
+      </div>
       </div>
     </a>
   );

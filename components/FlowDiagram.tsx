@@ -11,6 +11,7 @@ import {
   type Allocation,
 } from "@/lib/data";
 import Reveal from "./Reveal";
+import SectionHeader from "./SectionHeader";
 
 /* ---- geometry ---- */
 const W = 920;
@@ -175,14 +176,18 @@ export default function FlowDiagram() {
     !hover || r.from === hover || r.to === hover;
 
   return (
-    <section id="synthesis" className="relative mx-auto max-w-6xl px-5 py-24 sm:py-32">
-      <Reveal>
-        <div className="flex items-center gap-3">
-          <span className="chip">Synthesis</span>
-          <span className="h-px flex-1 bg-[var(--border)]" />
-        </div>
-        <h2 className="section-title mt-4">The Full Flow</h2>
-        <p className="lede mt-5">
+    <section id="synthesis" className="relative mx-auto max-w-6xl px-5 py-28 sm:py-36">
+      <SectionHeader
+        eyebrow="Synthesis"
+        num="04"
+        accent="var(--btl-grp)"
+        title={
+          <>
+            The full <em>flow</em>
+          </>
+        }
+      >
+        <p className="lede">
           One picture of the whole corpus:{" "}
           <span style={{ color: "var(--atl-ind)" }}>where</span> assistance sits
           flows into <span style={{ color: "var(--struct)" }}>what</span> labor
@@ -190,7 +195,7 @@ export default function FlowDiagram() {
           <span style={{ color: "var(--btl-grp)" }}>who</span> leads it. Hover any
           node to isolate its paths.
         </p>
-      </Reveal>
+      </SectionHeader>
 
       <Reveal delay={80}>
         <div className="card mt-12 overflow-x-auto p-4 sm:p-6">

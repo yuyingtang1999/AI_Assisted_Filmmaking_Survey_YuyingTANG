@@ -10,6 +10,8 @@ import {
   type Allocation,
 } from "@/lib/data";
 import Reveal from "./Reveal";
+import SectionHeader from "./SectionHeader";
+import Figure from "./Figure";
 
 function counts(type: LaborType) {
   const c = { "Human Only": 0, HA: 0, "AI Only": 0 } as Record<Allocation, number>;
@@ -29,19 +31,32 @@ export default function LaborAllocation() {
   const humanShare = ((c["Human Only"] + c.HA * 0.5) / (total || 1)) * 100;
 
   return (
-    <section id="allocation" className="relative mx-auto max-w-6xl px-5 py-24 sm:py-32">
-      <Reveal>
-        <div className="flex items-center gap-3">
-          <span className="chip">Layer 3 · RQ3</span>
-          <span className="h-px flex-1 bg-[var(--border)]" />
-        </div>
-        <h2 className="section-title mt-4">Labor Allocation — Who Leads?</h2>
-        <p className="lede mt-5">
+    <section id="allocation" className="relative mx-auto max-w-6xl px-5 py-28 sm:py-36">
+      <SectionHeader
+        eyebrow="Layer 3 · RQ3"
+        num="03"
+        accent="var(--meaning)"
+        title={
+          <>
+            Labor Allocation — <em>who</em> leads?
+          </>
+        }
+      >
+        <p className="lede">
           For every labor type a system touches, the work is split between human
           and machine as <strong>human-only</strong>, <strong>AI-only</strong>, or{" "}
           <strong>human–AI collaboration</strong>. Select a labor type to see
           where control sits.
         </p>
+      </SectionHeader>
+
+      <Reveal className="mt-12">
+        <Figure
+          src="/figures/allocation-steps.jpg"
+          alt="Two-step coding method: identify evidence of human and AI labor, then derive the allocation label."
+          caption="How allocation is coded: first identify evidence of human and AI labor per type, then derive a human-only, AI-only, or collaboration label."
+          ratio={2131 / 631}
+        />
       </Reveal>
 
       <div className="mt-14 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">

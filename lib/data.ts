@@ -135,3 +135,17 @@ export function typeAllocFlows() {
 }
 
 export const CORPUS = { total: PAPERS.length, venues: "CHI & UIST", span: "2021–2025" };
+
+// ---------------------------------------------------------------------------
+// System screenshots extracted from the PQE deck (public/figures/*.jpg)
+// ---------------------------------------------------------------------------
+export const PAPER_IMAGES: Record<number, string> = {
+  3: "/figures/scriptviz.jpg",
+  22: "/figures/gentune.jpg",
+  26: "/figures/collagevis.jpg",
+  27: "/figures/cinevision.jpg",
+  28: "/figures/anicraft.jpg",
+  30: "/figures/paratrouper.jpg",
+  31: "/figures/understanding.jpg",
+};
+export const paperImage = (id: number): string | undefined => PAPER_IMAGES[id];

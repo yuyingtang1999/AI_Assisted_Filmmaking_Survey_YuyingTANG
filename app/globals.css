@@ -5,15 +5,15 @@
    Palette sourced from the PQE deck (labor-site & labor-type gradients).
    =========================================================================== */
 :root {
-  --bg: #07090f;
-  --bg-2: #0b0f19;
-  --panel: #121826;
-  --panel-2: #161d2e;
-  --border: rgba(255, 255, 255, 0.09);
+  --bg: #06070c;
+  --bg-2: #0a0d16;
+  --panel: #111726;
+  --panel-2: #151c2d;
+  --border: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.16);
-  --fg: #f5f7fa;
+  --fg: #f3f5f9;
   --muted: #9aa4b6;
-  --faint: #6b7386;
+  --faint: #656d80;
 
   /* Labor Sites */
   --atl-ind: #e05548;
@@ -27,6 +27,11 @@
   --struct: #74b47d;
   --meaning: #5f82d8;
   --relational: #9784c9;
+
+  --font-sans-stack: var(--font-sans, ui-sans-serif, system-ui, -apple-system,
+      "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
+  --font-display-stack: var(--font-display, Georgia, "Times New Roman", serif);
+  --font-mono-stack: var(--font-mono, ui-monospace, "SF Mono", Menlo, monospace);
 }
 
 * {
@@ -35,7 +40,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 76px;
+  scroll-padding-top: 84px;
 }
 
 html,
@@ -47,113 +52,191 @@ body {
 body {
   color: var(--fg);
   background: var(--bg);
-  font-family: var(--font-sans, ui-sans-serif, system-ui, -apple-system,
-      "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
+  font-family: var(--font-sans-stack);
   -webkit-font-smoothing: antialiased;
   line-height: 1.6;
+  letter-spacing: -0.006em;
 }
 
-/* Subtle film-grain overlay across the whole page */
-body::before {
+/* ---- Layered aurora + grain, fixed behind everything ---- */
+.bg-aurora {
+  position: fixed;
+  inset: -20% -10% -10% -10%;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(70px) saturate(115%);
+  opacity: 0.38;
+}
+.bg-aurora span {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+.bg-aurora .a1 {
+  width: 46vw; height: 46vw; left: -6%; top: -4%;
+  background: radial-gradient(circle, var(--atl-ind), transparent 62%);
+  animation: drift1 26s ease-in-out infinite;
+}
+.bg-aurora .a2 {
+  width: 40vw; height: 40vw; right: -8%; top: 8%;
+  background: radial-gradient(circle, var(--meaning), transparent 62%);
+  animation: drift2 32s ease-in-out infinite;
+}
+.bg-aurora .a3 {
+  width: 44vw; height: 44vw; left: 18%; bottom: -14%;
+  background: radial-gradient(circle, var(--btl-grp), transparent 62%);
+  animation: drift3 30s ease-in-out infinite;
+}
+.bg-aurora .a4 {
+  width: 34vw; height: 34vw; right: 12%; bottom: 2%;
+  background: radial-gradient(circle, var(--relational), transparent 62%);
+  animation: drift1 36s ease-in-out infinite reverse;
+}
+@keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(6%,4%) scale(1.12)} }
+@keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-5%,6%) scale(1.08)} }
+@keyframes drift3 { 0%,100%{transform:translate(0,0) scale(1.05)} 50%{transform:translate(4%,-6%) scale(0.94)} }
+
+/* film-grain overlay */
+body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* ---- Typography helpers ---- */
+.font-display { font-family: var(--font-display-stack); }
+.font-mono { font-family: var(--font-mono-stack); }
+
 .eyebrow {
   text-transform: uppercase;
-  letter-spacing: 0.22em;
-  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  font-size: 0.7rem;
   font-weight: 600;
   color: var(--muted);
 }
 
 .section-title {
-  font-size: clamp(1.9rem, 4vw, 3rem);
-  font-weight: 650;
+  font-family: var(--font-display-stack);
+  font-size: clamp(2.2rem, 5vw, 3.9rem);
+  font-weight: 500;
   letter-spacing: -0.02em;
-  line-height: 1.08;
+  line-height: 1.04;
+}
+.section-title em {
+  font-style: italic;
+  font-weight: 400;
 }
 
 .lede {
   color: var(--muted);
-  font-size: clamp(1rem, 1.4vw, 1.15rem);
-  max-width: 58ch;
+  font-size: clamp(1.02rem, 1.4vw, 1.2rem);
+  max-width: 60ch;
+  line-height: 1.72;
+}
+
+/* giant ghost numerals behind section headers */
+.ghost-num {
+  font-family: var(--font-display-stack);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.07);
+  user-select: none;
+  pointer-events: none;
 }
 
 /* ---- Reveal-on-scroll ---- */
 .reveal {
   opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  transform: translateY(30px);
+  filter: blur(6px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
 }
 .reveal.in {
   opacity: 1;
   transform: none;
+  filter: none;
 }
 
-/* ---- Hero animations ---- */
+/* ---- Animations ---- */
 @keyframes codeRain {
   0% { transform: translateY(-100%); opacity: 0; }
   10% { opacity: 0.6; }
   90% { opacity: 0.6; }
   100% { transform: translateY(100vh); opacity: 0; }
 }
-@keyframes filmPan {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-@keyframes blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
-@keyframes floatY {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 0.9; }
-}
+@keyframes filmPan { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes pulseGlow { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.95; } }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 
 .caret::after {
   content: "";
   display: inline-block;
   width: 3px;
-  height: 1em;
-  margin-left: 4px;
+  height: 0.92em;
+  margin-left: 5px;
   background: var(--atl-ind);
-  vertical-align: -0.12em;
+  vertical-align: -0.1em;
   animation: blink 1s step-end infinite;
 }
 
-/* ---- Utility surfaces ---- */
+/* ---- Surfaces ---- */
 .card {
-  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  background: linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.008));
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 18px;
+  backdrop-filter: blur(6px);
 }
+.card-hover {
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, box-shadow 0.4s;
+}
+.card-hover:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 24px 60px -30px rgba(0,0,0,0.8);
+}
+
 .chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   border-radius: 999px;
   border: 1px solid var(--border-strong);
-  padding: 3px 10px;
-  font-size: 0.72rem;
+  padding: 4px 11px;
+  font-size: 0.7rem;
   font-weight: 500;
+  letter-spacing: 0.03em;
   color: var(--muted);
+  background: rgba(255,255,255,0.02);
 }
 
-/* thin scrollbar for drawers */
-.thin-scroll::-webkit-scrollbar { width: 8px; }
+/* figure frame for PDF images */
+.figure {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: #0e1320;
+}
+.figure img { display: block; width: 100%; height: auto; }
+.figure::after {
+  content: "";
+  position: absolute; inset: 0;
+  box-shadow: inset 0 0 60px rgba(0,0,0,0.35);
+  pointer-events: none;
+}
+
+.thin-scroll::-webkit-scrollbar { width: 9px; }
 .thin-scroll::-webkit-scrollbar-thumb {
   background: rgba(255,255,255,0.14);
   border-radius: 8px;
@@ -166,5 +249,6 @@ body::before {
     transition-duration: 0.001ms !important;
   }
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; }
+  .reveal { opacity: 1; transform: none; filter: none; }
+  .bg-aurora { opacity: 0.4; }
 }

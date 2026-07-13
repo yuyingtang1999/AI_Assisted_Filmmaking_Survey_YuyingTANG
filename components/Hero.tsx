@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { CORPUS } from "@/lib/data";
+import { useParallax } from "./hooks";
 
 const PHRASE = "Who is really making the film?";
 const SNIPPETS = [
@@ -12,6 +13,8 @@ const SNIPPETS = [
 
 export default function Hero() {
   const [typed, setTyped] = useState("");
+  const [filmRef, filmOffset] = useParallax<HTMLDivElement>(0.12);
+  const [contentRef, contentOffset] = useParallax<HTMLDivElement>(-0.05);
 
   useEffect(() => {
     let i = 0;
@@ -19,11 +22,10 @@ export default function Hero() {
       i += 1;
       setTyped(PHRASE.slice(0, i));
       if (i >= PHRASE.length) clearInterval(t);
-    }, 55);
+    }, 52);
     return () => clearInterval(t);
   }, []);
 
-  // Deterministic pseudo-random columns (stable across SSR/CSR).
   const columns = useMemo(
     () =>
       Array.from({ length: 22 }, (_, i) => {
@@ -34,7 +36,7 @@ export default function Hero() {
           delay: r * 8,
           dur: 7 + r * 8,
           text: SNIPPETS[i % SNIPPETS.length],
-          op: 0.18 + r * 0.5,
+          op: 0.16 + r * 0.5,
         };
       }),
     []
@@ -45,16 +47,6 @@ export default function Hero() {
       id="hero"
       className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-6"
     >
-      {/* ambient gradient */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-20"
-        style={{
-          background:
-            "radial-gradient(60% 45% at 50% 8%, rgba(224,85,72,0.16), transparent 70%), radial-gradient(55% 45% at 82% 92%, rgba(95,130,216,0.16), transparent 70%), radial-gradient(50% 40% at 12% 80%, rgba(47,178,143,0.12), transparent 70%)",
-        }}
-      />
-
       {/* code rain */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         {columns.map((c, i) => (
@@ -73,15 +65,14 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* film-strip band panning behind the title */}
+      {/* film-strip band panning behind the title (parallax) */}
       <div
+        ref={filmRef}
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-1/2 -z-10 h-28 -translate-y-1/2 opacity-[0.14]"
+        className="pointer-events-none absolute inset-x-0 top-1/2 -z-10 h-28 -translate-y-1/2 opacity-[0.12]"
+        style={{ transform: `translateY(calc(-50% + ${filmOffset}px))` }}
       >
-        <div
-          className="flex h-full w-[200%]"
-          style={{ animation: "filmPan 40s linear infinite" }}
-        >
+        <div className="flex h-full w-[200%]" style={{ animation: "filmPan 42s linear infinite" }}>
           {Array.from({ length: 48 }).map((_, i) => (
             <div
               key={i}
@@ -96,8 +87,12 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 flex w-full max-w-3xl flex-col items-center text-center">
-        <span className="chip mb-7">
+      <div
+        ref={contentRef}
+        className="relative z-10 flex w-full max-w-3xl flex-col items-center text-center"
+        style={{ transform: `translateY(${contentOffset}px)` }}
+      >
+        <span className="chip mb-8">
           <span
             className="h-1.5 w-1.5 rounded-full"
             style={{ background: "var(--btl-grp)", animation: "pulseGlow 2.2s ease-in-out infinite" }}
@@ -105,19 +100,26 @@ export default function Hero() {
           UROP · Research Showcase
         </span>
 
-        <h1 className="font-mono text-3xl font-semibold leading-tight tracking-tight sm:text-5xl">
+        <p className="font-display mb-4 text-lg italic text-[var(--muted)] sm:text-xl">
+          Algorithm behind the Lens
+        </p>
+
+        <h1 className="font-mono text-[1.7rem] font-semibold leading-tight tracking-tight sm:text-5xl">
           <span className="caret">{typed}</span>
         </h1>
 
-        <p className="mt-8 max-w-xl text-pretty text-base leading-relaxed text-[var(--muted)] sm:text-lg">
+        <p className="mt-9 max-w-xl text-pretty text-base leading-relaxed text-[var(--muted)] sm:text-lg">
           A survey of how AI is woven into filmmaking — mapping{" "}
-          <span className="text-[var(--fg)]">where</span> assistance sits,{" "}
-          <span className="text-[var(--fg)]">what</span> labor it touches, and{" "}
-          <span className="text-[var(--fg)]">who</span> ultimately leads the
-          work, across {CORPUS.total} systems from {CORPUS.span}.
+          <span className="font-display italic text-[var(--fg)]">where</span>{" "}
+          assistance sits,{" "}
+          <span className="font-display italic text-[var(--fg)]">what</span>{" "}
+          labor it touches, and{" "}
+          <span className="font-display italic text-[var(--fg)]">who</span>{" "}
+          ultimately leads the work, across {CORPUS.total} systems from{" "}
+          {CORPUS.span}.
         </p>
 
-        <p className="mt-4 text-xs uppercase tracking-[0.2em] text-[var(--faint)]">
+        <p className="mt-5 font-mono text-[0.68rem] uppercase tracking-[0.25em] text-[var(--faint)]">
           Yuying Tang · Mapping the Labor Landscape of AI-Assisted Filmmaking
         </p>
 
@@ -125,11 +127,11 @@ export default function Hero() {
           onClick={() =>
             document.getElementById("framework")?.scrollIntoView({ behavior: "smooth" })
           }
-          className="mt-12 flex flex-col items-center gap-2 text-[var(--faint)] transition-colors hover:text-[var(--fg)]"
+          className="mt-14 flex flex-col items-center gap-2 text-[var(--faint)] transition-colors hover:text-[var(--fg)]"
           style={{ animation: "floatY 2.6s ease-in-out infinite" }}
           aria-label="Scroll to begin"
         >
-          <span className="text-[0.7rem] uppercase tracking-[0.25em]">Begin</span>
+          <span className="text-[0.68rem] uppercase tracking-[0.25em]">Begin</span>
           <svg width="18" height="26" viewBox="0 0 18 26" fill="none">
             <rect x="1" y="1" width="16" height="24" rx="8" stroke="currentColor" strokeOpacity="0.5" />
             <circle cx="9" cy="8" r="2.5" fill="currentColor" />

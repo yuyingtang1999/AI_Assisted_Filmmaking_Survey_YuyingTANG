@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
 import {
   TYPES,
   siteById,
   typeById,
   ALLOCATIONS,
+  paperImage,
   type Paper,
 } from "@/lib/data";
 
@@ -29,6 +31,7 @@ export default function PaperDrawer({
   }, [paper, onClose]);
 
   const site = paper ? siteById(paper.site) : null;
+  const img = paper ? paperImage(paper.id) : undefined;
 
   return (
     <div
@@ -51,6 +54,22 @@ export default function PaperDrawer({
       >
         {paper && site && (
           <>
+            {img && (
+              <div className="relative -mx-6 -mt-6 mb-5 aspect-[16/9] overflow-hidden border-b border-[var(--border)] sm:-mx-7 sm:-mt-7">
+                <Image
+                  src={img}
+                  alt={`${paper.name} system`}
+                  fill
+                  sizes="(max-width: 640px) 100vw, 448px"
+                  style={{ objectFit: "cover" }}
+                  priority
+                />
+                <span
+                  className="absolute inset-x-0 bottom-0 h-16"
+                  style={{ background: "linear-gradient(transparent, var(--bg-2))" }}
+                />
+              </div>
+            )}
             <div className="flex items-start justify-between gap-4">
               <span
                 className="rounded-full px-3 py-1 text-xs font-semibold"

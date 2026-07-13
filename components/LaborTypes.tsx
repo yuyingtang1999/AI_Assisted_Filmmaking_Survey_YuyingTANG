@@ -3,6 +3,8 @@
 import { useMemo, useState } from "react";
 import { TYPES, YEARS, PAPERS, type LaborType } from "@/lib/data";
 import Reveal from "./Reveal";
+import SectionHeader from "./SectionHeader";
+import Figure from "./Figure";
 
 export default function LaborTypes() {
   const [yearIdx, setYearIdx] = useState(YEARS.length - 1);
@@ -29,19 +31,23 @@ export default function LaborTypes() {
       : "By 2025 structural and meaning-making support have expanded markedly with GenAI — yet relational labor stays scarce.";
 
   return (
-    <section id="types" className="relative mx-auto max-w-6xl px-5 py-24 sm:py-32">
-      <Reveal>
-        <div className="flex items-center gap-3">
-          <span className="chip">Layer 2 · RQ2</span>
-          <span className="h-px flex-1 bg-[var(--border)]" />
-        </div>
-        <h2 className="section-title mt-4">Labor Types — What Work?</h2>
-        <p className="lede mt-5">
+    <section id="types" className="relative mx-auto max-w-6xl px-5 py-28 sm:py-36">
+      <SectionHeader
+        eyebrow="Layer 2 · RQ2"
+        num="02"
+        accent="var(--struct)"
+        title={
+          <>
+            Labor Types — <em>what</em> work?
+          </>
+        }
+      >
+        <p className="lede">
           Four forms of filmmaking labor a system can bring into scope. Drag the
           timeline to watch AI&apos;s reach spread outward from a stable
           executional core.
         </p>
-      </Reveal>
+      </SectionHeader>
 
       {/* type cards */}
       <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -132,8 +138,17 @@ export default function LaborTypes() {
         </div>
       </Reveal>
 
+      <Reveal className="mt-12">
+        <Figure
+          src="/figures/types-by-site.jpg"
+          alt="Grouped bar chart of labor-type coverage across the four labor sites."
+          caption="Labor-type coverage across sites: execution is always in scope; structure and meaning cluster in ATL; relational labor appears only at group sites."
+          ratio={1489 / 747}
+        />
+      </Reveal>
+
       <Reveal delay={80}>
-        <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-relaxed text-[var(--faint)]">
+        <p className="mx-auto mt-10 max-w-3xl text-center text-sm leading-relaxed text-[var(--faint)]">
           <strong className="text-[var(--muted)]">The through-line:</strong>{" "}
           coverage broadened from a stable executional core toward greater
           structural and meaning-making support, while relational labor —
