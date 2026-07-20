@@ -31,7 +31,7 @@ export default function LaborAllocation() {
   const humanShare = ((c["Human Only"] + c.HA * 0.5) / (total || 1)) * 100;
 
   return (
-    <section id="allocation" className="relative mx-auto max-w-6xl px-5 py-28 sm:py-36">
+    <section id="allocation" className="relative mx-auto max-w-[var(--maxw)] px-6 py-28 sm:py-36">
       <SectionHeader
         eyebrow="Layer 3 · RQ3"
         num="03"
@@ -74,7 +74,7 @@ export default function LaborAllocation() {
                   className="w-full rounded-2xl border p-4 text-left transition-all"
                   style={{
                     borderColor: on ? ty.color : "var(--border)",
-                    background: on ? ty.soft : "rgba(255,255,255,0.02)",
+                    background: on ? ty.soft : "var(--fill-2)",
                   }}
                 >
                   <div className="flex items-center justify-between">
@@ -90,7 +90,7 @@ export default function LaborAllocation() {
                     </span>
                   </div>
                   {/* stacked bar */}
-                  <div className="mt-3 flex h-2.5 w-full overflow-hidden rounded-full bg-white/5">
+                  <div className="mt-3 flex h-2.5 w-full overflow-hidden rounded-full bg-[var(--track)]">
                     {ALLOCATIONS.map((a) => {
                       const w = tot ? (cc[a.id] / tot) * 100 : 0;
                       return (
@@ -142,7 +142,7 @@ export default function LaborAllocation() {
                   AI <AiIcon />
                 </span>
               </div>
-              <div className="relative mt-2 h-4 w-full overflow-hidden rounded-full bg-white/5">
+              <div className="relative mt-2 h-4 w-full overflow-hidden rounded-full bg-[var(--track)]">
                 <div
                   className="absolute inset-y-0 left-0 rounded-full transition-all duration-500"
                   style={{
@@ -152,7 +152,7 @@ export default function LaborAllocation() {
                   }}
                 />
                 <div
-                  className="absolute inset-y-0 z-10 w-0.5 -translate-x-1/2 bg-white/60 transition-all duration-500"
+                  className="absolute inset-y-0 z-10 w-0.5 -translate-x-1/2 bg-[var(--divider)] transition-all duration-500"
                   style={{ left: `${humanShare}%` }}
                 />
               </div>

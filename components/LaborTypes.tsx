@@ -31,7 +31,7 @@ export default function LaborTypes() {
       : "By 2025 structural and meaning-making support have expanded markedly with GenAI — yet relational labor stays scarce.";
 
   return (
-    <section id="types" className="relative mx-auto max-w-6xl px-5 py-28 sm:py-36">
+    <section id="types" className="relative mx-auto max-w-[var(--maxw)] px-6 py-28 sm:py-36">
       <SectionHeader
         eyebrow="Layer 2 · RQ2"
         num="02"
@@ -85,7 +85,7 @@ export default function LaborTypes() {
                 </p>
 
                 {/* progress bar of coverage at this year */}
-                <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-white/5">
+                <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-[var(--track)]">
                   <div
                     className="h-full rounded-full transition-all duration-500"
                     style={{

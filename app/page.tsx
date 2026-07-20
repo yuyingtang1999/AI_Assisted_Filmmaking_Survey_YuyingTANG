@@ -12,14 +12,6 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
-      {/* drifting aurora, fixed behind all content */}
-      <div className="bg-aurora" aria-hidden>
-        <span className="a1" />
-        <span className="a2" />
-        <span className="a3" />
-        <span className="a4" />
-      </div>
-
       <NavBar />
       <main className="relative z-[2]">
         <Hero />

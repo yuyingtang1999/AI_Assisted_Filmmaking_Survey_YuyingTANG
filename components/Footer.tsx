@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="border-t border-[var(--border)] px-5 py-10">
-      <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 text-sm sm:flex-row sm:items-center">
+      <div className="mx-auto flex max-w-[var(--maxw)] flex-col items-start justify-between gap-4 text-sm sm:flex-row sm:items-center">
         <div>
           <p className="font-semibold">Algorithm behind the Lens</p>
           <p className="mt-1 text-xs text-[var(--muted)]">

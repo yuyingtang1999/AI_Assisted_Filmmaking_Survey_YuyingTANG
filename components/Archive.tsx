@@ -72,7 +72,7 @@ export default function Archive() {
   const anyFilter = sites.size || types.size || venues.size;
 
   return (
-    <section id="archive" className="relative mx-auto max-w-6xl px-5 py-28 sm:py-36">
+    <section id="archive" className="relative mx-auto max-w-[var(--maxw)] px-6 py-28 sm:py-36">
       <SectionHeader
         eyebrow="The Archive"
         num="05"
@@ -142,7 +142,7 @@ export default function Archive() {
                   className="rounded-lg px-3 py-1.5 text-xs font-medium capitalize transition-colors"
                   style={{
                     background:
-                      group === m ? "rgba(255,255,255,0.08)" : "transparent",
+                      group === m ? "var(--fill-3)" : "transparent",
                     color: group === m ? "var(--fg)" : "var(--faint)",
                     border: "1px solid var(--border)",
                   }}
@@ -247,7 +247,7 @@ function Toggle({
       onClick={onClick}
       className="rounded-full px-3 py-1 text-xs font-medium transition-all"
       style={{
-        background: on ? `${color}26` : "rgba(255,255,255,0.03)",
+        background: on ? `${color}26` : "var(--fill-2)",
         border: `1px solid ${on ? color : "var(--border)"}`,
         color: on ? "var(--fg)" : "var(--muted)",
       }}

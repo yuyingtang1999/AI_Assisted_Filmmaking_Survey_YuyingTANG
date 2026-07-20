@@ -1,7 +1,7 @@
 import Reveal from "./Reveal";
 import type { ReactNode } from "react";
 
-/** Editorial section header: eyebrow chip, big serif title, lede, ghost numeral. */
+/** Editorial masthead: eyebrow + index rule, oversized serif title left, lede right. */
 export default function SectionHeader({
   eyebrow,
   num,
@@ -16,35 +16,33 @@ export default function SectionHeader({
   accent?: string;
 }) {
   return (
-    <div className="relative">
-      {num && (
-        <span className="ghost-num absolute -top-10 right-0 select-none text-[7rem] sm:text-[10rem]">
-          {num}
-        </span>
-      )}
+    <div>
       <Reveal>
-        <div className="flex items-center gap-3">
-          <span
-            className="chip"
-            style={{ borderColor: `${accent}66`, color: "var(--fg)" }}
-          >
+        <div className="flex items-end justify-between gap-4">
+          <span className="label flex items-center gap-2.5">
             <span
-              className="h-1.5 w-1.5 rounded-full"
+              className="inline-block h-2 w-2 rounded-full"
               style={{ background: accent }}
             />
             {eyebrow}
           </span>
-          <span className="h-px flex-1 bg-[var(--border)]" />
+          {num && (
+            <span className="ghost-num text-5xl sm:text-6xl">{num}</span>
+          )}
         </div>
+        <div className="rule mt-4" />
       </Reveal>
-      <Reveal delay={60}>
-        <h2 className="section-title mt-6 max-w-4xl">{title}</h2>
-      </Reveal>
-      {children && (
-        <Reveal delay={120}>
-          <div className="mt-6">{children}</div>
+
+      <div className="mt-9 grid gap-6 lg:grid-cols-12 lg:gap-10">
+        <Reveal delay={60} className="lg:col-span-7">
+          <h2 className="section-title">{title}</h2>
         </Reveal>
-      )}
+        {children && (
+          <Reveal delay={120} className="lg:col-span-5 lg:pt-3">
+            <div>{children}</div>
+          </Reveal>
+        )}
+      </div>
     </div>
   );
 }

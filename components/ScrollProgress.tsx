@@ -26,11 +26,7 @@ export default function ScrollProgress() {
     <div className="fixed inset-x-0 top-0 z-[70] h-0.5 bg-transparent">
       <div
         className="h-full origin-left"
-        style={{
-          width: `${pct}%`,
-          background:
-            "linear-gradient(90deg, var(--atl-ind), var(--btl-ind), var(--struct), var(--meaning), var(--relational))",
-        }}
+        style={{ width: `${pct}%`, background: "var(--ink)" }}
       />
     </div>
   );

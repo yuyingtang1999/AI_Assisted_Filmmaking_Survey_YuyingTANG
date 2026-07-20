@@ -50,31 +50,27 @@ export default function NavBar() {
     <header
       className="fixed inset-x-0 top-0 z-50 transition-all"
       style={{
-        background: scrolled ? "rgba(7,9,15,0.82)" : "transparent",
+        background: scrolled ? "rgba(246,245,241,0.82)" : "transparent",
         backdropFilter: scrolled ? "blur(12px)" : "none",
         borderBottom: scrolled
           ? "1px solid var(--border)"
           : "1px solid transparent",
       }}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5">
+      <nav className="mx-auto flex max-w-[var(--maxw)] items-center justify-between px-6 py-3.5">
         <button
           onClick={() => go("hero")}
           className="group flex items-center gap-2.5 text-left"
         >
-          <span className="relative flex h-6 w-6 items-center justify-center">
-            <span
-              className="absolute inset-0 rounded-md"
-              style={{
-                background:
-                  "conic-gradient(from 210deg, var(--atl-ind), var(--btl-ind), var(--struct), var(--meaning), var(--relational), var(--atl-ind))",
-                opacity: 0.9,
-              }}
-            />
-            <span className="relative h-2 w-2 rounded-full bg-[var(--bg)]" />
+          <span className="relative flex h-5 w-5 items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="8.2" stroke="var(--ink)" strokeWidth="1.4" />
+              <circle cx="10" cy="10" r="2.6" fill="var(--ink)" />
+            </svg>
           </span>
-          <span className="text-sm font-semibold tracking-tight">
-            Algorithm <span className="text-[var(--muted)]">behind the Lens</span>
+          <span className="font-display text-[0.95rem] font-medium tracking-tight">
+            Algorithm{" "}
+            <span className="italic text-[var(--muted)]">behind the Lens</span>
           </span>
         </button>
 
@@ -89,8 +85,8 @@ export default function NavBar() {
               {l.label}
               {active === l.id && (
                 <span
-                  className="absolute inset-x-2 -bottom-0.5 h-[2px] rounded-full"
-                  style={{ background: "var(--atl-ind)" }}
+                  className="absolute inset-x-3 -bottom-0.5 h-[1.5px]"
+                  style={{ background: "var(--ink)" }}
                 />
               )}
             </button>
@@ -121,7 +117,7 @@ export default function NavBar() {
                 style={{
                   color: active === l.id ? "var(--fg)" : "var(--muted)",
                   background:
-                    active === l.id ? "rgba(255,255,255,0.05)" : "transparent",
+                    active === l.id ? "var(--fill-1)" : "transparent",
                 }}
               >
                 {l.label}

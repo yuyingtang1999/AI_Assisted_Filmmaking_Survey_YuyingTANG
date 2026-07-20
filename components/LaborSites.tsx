@@ -11,9 +11,23 @@ import {
 } from "@/lib/data";
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
-import Figure from "./Figure";
 
 const CELL_ORDER: SiteId[] = ["atl-ind", "atl-grp", "btl-ind", "btl-grp"];
+
+/* compact line-icons per quadrant (ink glyphs) */
+function RoleIcons({ id }: { id: SiteId }) {
+  const s = { stroke: "currentColor", strokeWidth: 1.5, fill: "none", strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  const wrap = (children: React.ReactNode) => (
+    <svg width="22" height="22" viewBox="0 0 24 24" {...s}>{children}</svg>
+  );
+  if (id === "atl-ind")
+    return wrap(<><circle cx="8" cy="7" r="2.4" /><path d="M4 19c0-2.5 1.8-4.2 4-4.2" /><path d="M15 5l4 1.5-1.4 3.8" /><path d="M14 20l3-9" /></>);
+  if (id === "atl-grp")
+    return wrap(<><circle cx="12" cy="6" r="2" /><circle cx="6" cy="15" r="2" /><circle cx="18" cy="15" r="2" /><path d="M12 8v3M10.5 13l-3 1M13.5 13l3 1" /></>);
+  if (id === "btl-ind")
+    return wrap(<><rect x="3" y="5" width="12" height="9" rx="1.5" /><path d="M6 18h6M9 14v4" /><path d="M18 9v6M21 11v2" /></>);
+  return wrap(<><circle cx="8" cy="8" r="2.6" /><path d="M8 5.4V4M8 12.6V14M11 8h1.4M4 8H2.6M10 6l1-1M5 11l-1 1M10 10l1 1M5 5 4 4" /><rect x="14" y="12" width="7" height="7" rx="1" /></>);
+}
 
 export default function LaborSites() {
   const [active, setActive] = useState<SiteId>("btl-ind");
@@ -29,7 +43,7 @@ export default function LaborSites() {
   }, [shown]);
 
   return (
-    <section id="sites" className="relative mx-auto max-w-6xl px-5 py-28 sm:py-36">
+    <section id="sites" className="relative mx-auto max-w-[var(--maxw)] px-6 py-28 sm:py-36">
       <SectionHeader
         eyebrow="Layer 1 · RQ1"
         num="01"
@@ -42,49 +56,36 @@ export default function LaborSites() {
       >
         <p className="lede">
           Every system sits somewhere in the production hierarchy. Two axes
-          define the site: <strong>ATL vs. BTL</strong> (above- vs.
-          below-the-line creative position) and{" "}
-          <strong>Individual vs. Group</strong> (who is being assisted). Hover a
-          quadrant to inspect it.
+          define the site: <strong className="font-semibold text-[var(--fg)]">ATL vs. BTL</strong>{" "}
+          (above- vs. below-the-line creative position) and{" "}
+          <strong className="font-semibold text-[var(--fg)]">Individual vs. Group</strong>{" "}
+          (who is being assisted). Hover a quadrant to inspect it.
         </p>
       </SectionHeader>
 
-      {/* official four-sites diagram from the deck */}
-      <Reveal className="mt-12">
-        <Figure
-          src="/figures/sites-diagram.jpg"
-          alt="The four labor sites arranged as an ATL/BTL by Individual/Group matrix, with role icons."
-          caption="The four labor sites, as framed in the survey: ATL/BTL × Individual/Group, each assisting distinct production roles."
-          ratio={2049 / 1029}
-        />
-      </Reveal>
-
-      <div className="mt-14 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-        {/* ---- 2x2 matrix ---- */}
+      <div className="mt-16 grid gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+        {/* ---- native 2x2 diagram ---- */}
         <Reveal>
-          <div className="flex gap-3">
-            <div className="flex flex-col items-center justify-around py-8">
-              {["ATL", "BTL"].map((t) => (
-                <span
-                  key={t}
-                  className="font-mono text-xs tracking-widest text-[var(--faint)]"
-                  style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
-                >
-                  {t}
-                </span>
-              ))}
+          <div className="flex gap-4">
+            {/* vertical axis */}
+            <div className="flex flex-col items-center">
+              <span className="label mb-3 whitespace-nowrap [writing-mode:vertical-rl] [transform:rotate(180deg)]">
+                Production Position
+              </span>
+              <div className="flex flex-1 flex-col justify-around">
+                <AxisTick top>ATL</AxisTick>
+                <AxisTick>BTL</AxisTick>
+              </div>
             </div>
 
             <div className="flex-1">
-              <div className="mb-2 grid grid-cols-2 text-center">
+              <div className="mb-2 grid grid-cols-2">
                 {["Individual", "Group"].map((t) => (
-                  <span key={t} className="font-mono text-xs tracking-widest text-[var(--faint)]">
-                    {t}
-                  </span>
+                  <span key={t} className="label text-center">{t}</span>
                 ))}
               </div>
 
-              <div className="grid grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-2 gap-3">
                 {CELL_ORDER.map((id) => {
                   const s = siteById(id);
                   const on = active === id;
@@ -94,35 +95,36 @@ export default function LaborSites() {
                       onMouseEnter={() => setActive(id)}
                       onFocus={() => setActive(id)}
                       onClick={() => setActive(id)}
-                      className="group relative aspect-[4/3] overflow-hidden rounded-2xl p-4 text-left transition-all duration-300"
+                      className="group relative flex min-h-[180px] flex-col justify-between overflow-hidden rounded-xl p-4 text-left transition-all duration-300"
                       style={{
-                        background: on
-                          ? `linear-gradient(150deg, ${s.accent}30, ${s.accent}10)`
-                          : "rgba(255,255,255,0.02)",
-                        border: `1px solid ${on ? s.accent : "var(--border)"}`,
-                        boxShadow: on ? `0 16px 44px -20px ${s.accent}` : "none",
-                        transform: on ? "translateY(-2px)" : "none",
+                        background: s.soft,
+                        outline: on ? `2px solid ${s.accent}` : "1px solid var(--border)",
+                        outlineOffset: on ? "-1px" : "0",
+                        boxShadow: on ? "var(--card-shadow)" : "none",
+                        transform: on ? "translateY(-3px)" : "none",
+                        color: "#20242c",
                       }}
                     >
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-start justify-between">
+                        <span style={{ color: s.accent }}>
+                          <RoleIcons id={id} />
+                        </span>
                         <span
-                          className="h-2.5 w-2.5 rounded-full transition-transform group-hover:scale-125"
-                          style={{ background: s.accent }}
-                        />
-                        <span
-                          className="font-display text-3xl font-medium tabular-nums"
-                          style={{ color: on ? s.accent : "var(--faint)" }}
+                          className="font-display text-3xl font-light tabular-nums"
+                          style={{ color: s.accent }}
                         >
                           {s.pct}
                         </span>
                       </div>
-                      <div className="absolute inset-x-4 bottom-4">
-                        <p className="text-sm font-semibold">{s.short}</p>
-                        <p className="mt-0.5 text-[0.72rem] leading-snug text-[var(--muted)]">
-                          {s.roles}
+                      <div>
+                        <p className="text-[0.82rem] font-semibold" style={{ color: s.accent }}>
+                          {s.short}
                         </p>
-                        <p className="mt-1 text-[0.7rem] text-[var(--faint)]">
-                          {s.count} / {PAPERS.length} systems
+                        <p className="mt-1 text-[0.72rem] font-medium leading-snug text-[#3a4048]">
+                          {s.focus}
+                        </p>
+                        <p className="mt-1.5 text-[0.68rem] text-[#5c636d]">
+                          {s.roles} · {s.count}/{PAPERS.length}
                         </p>
                       </div>
                     </button>
@@ -130,28 +132,28 @@ export default function LaborSites() {
                 })}
               </div>
 
+              {/* cross-site */}
               <button
                 onMouseEnter={() => setActive("cross")}
                 onClick={() => setActive("cross")}
-                className="mt-2.5 flex w-full items-center justify-between rounded-2xl border p-4 text-left transition-all"
+                className="mt-3 flex w-full items-center justify-between rounded-xl p-4 text-left transition-all"
                 style={{
-                  background:
-                    active === "cross"
-                      ? "linear-gradient(150deg, rgba(154,161,171,0.22), rgba(154,161,171,0.06))"
-                      : "rgba(255,255,255,0.02)",
-                  borderColor: active === "cross" ? "var(--cross)" : "var(--border)",
+                  background: siteById("cross").soft,
+                  outline: active === "cross" ? "2px solid var(--cross)" : "1px solid var(--border)",
+                  outlineOffset: active === "cross" ? "-1px" : "0",
+                  color: "#20242c",
                 }}
               >
                 <div>
-                  <p className="text-sm font-semibold">Cross-Site Assistance</p>
-                  <p className="text-[0.72rem] text-[var(--muted)]">
+                  <p className="text-[0.82rem] font-semibold">Cross-Site Assistance</p>
+                  <p className="text-[0.72rem] text-[#5c636d]">
                     Systems spanning ATL &amp; BTL roles at once
                   </p>
                 </div>
-                <span className="font-display text-xl font-medium text-[var(--faint)]">
-                  2 / 31
-                </span>
+                <span className="font-display text-xl font-light">2 / 31</span>
               </button>
+
+              <p className="label mt-3 text-center">Assistance Context →</p>
             </div>
           </div>
         </Reveal>
@@ -159,8 +161,8 @@ export default function LaborSites() {
         {/* ---- detail panel ---- */}
         <Reveal delay={90}>
           <div
-            className="card h-full overflow-hidden transition-colors"
-            style={{ borderColor: `${site.accent}55` }}
+            className="card h-full overflow-hidden"
+            style={{ borderColor: `${site.accent}44` }}
           >
             {exemplar && (
               <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-[var(--border)]">
@@ -169,10 +171,10 @@ export default function LaborSites() {
                   src={exemplar.src}
                   alt={`${exemplar.name} — representative system`}
                   fill
-                  sizes="(max-width: 1024px) 100vw, 460px"
+                  sizes="(max-width: 1024px) 100vw, 420px"
                   style={{ objectFit: "cover" }}
                 />
-                <span className="absolute bottom-2 left-3 rounded-md bg-black/60 px-2 py-1 text-[0.68rem] font-medium backdrop-blur">
+                <span className="absolute bottom-2 left-3 rounded bg-black/60 px-2 py-1 text-[0.68rem] font-medium text-white backdrop-blur">
                   e.g. {exemplar.name}
                 </span>
               </div>
@@ -180,13 +182,13 @@ export default function LaborSites() {
             <div className="p-6">
               <span
                 className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold"
-                style={{ background: `${site.accent}22`, color: site.accent }}
+                style={{ background: `${site.accent}18`, color: site.accent }}
               >
                 {site.label}
               </span>
               <div className="mt-4 flex items-baseline gap-3">
                 <span
-                  className="font-display text-5xl font-medium tabular-nums"
+                  className="font-display text-5xl font-light tabular-nums"
                   style={{ color: site.accent }}
                 >
                   {site.pct}
@@ -198,17 +200,17 @@ export default function LaborSites() {
 
               <dl className="mt-5 grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <dt className="text-[var(--faint)]">Roles assisted</dt>
+                  <dt className="label">Roles assisted</dt>
                   <dd className="mt-1 font-medium">{site.roles}</dd>
                 </div>
                 <div>
-                  <dt className="text-[var(--faint)]">Core focus</dt>
+                  <dt className="label">Core focus</dt>
                   <dd className="mt-1 font-medium">{site.focus}</dd>
                 </div>
               </dl>
 
               <div className="mt-6">
-                <p className="text-xs uppercase tracking-widest text-[var(--faint)]">
+                <p className="label">
                   {active === "cross" ? "Cross-site systems" : "Systems here"}
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -219,7 +221,6 @@ export default function LaborSites() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="rounded-lg border border-[var(--border)] px-2.5 py-1.5 text-xs transition-colors hover:border-[var(--border-strong)]"
-                      style={{ background: "rgba(255,255,255,0.02)" }}
                       title={`Open ${p.name} (DOI)`}
                     >
                       {p.name}
@@ -232,15 +233,15 @@ export default function LaborSites() {
         </Reveal>
       </div>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-3">
+      <div className="mt-12 grid gap-4 sm:grid-cols-3">
         {[
           { k: "58.1%", v: "The corpus stays concentrated in BTL individual-level support — bounded, execution-oriented tasks that are easy to isolate and evaluate.", c: "var(--btl-ind)" },
           { k: "BTL › ATL", v: "BTL assistance is far more common than ATL. Creative direction resists formalization; operational craft does not.", c: "var(--atl-ind)" },
           { k: "2 / 31", v: "Cross-site positioning is still rare. Only two systems span multiple labor sites — an emerging, post-GenAI frontier.", c: "var(--cross)" },
         ].map((f, i) => (
           <Reveal key={i} delay={i * 90}>
-            <div className="card card-hover h-full p-5">
-              <p className="font-display text-3xl font-medium tabular-nums" style={{ color: f.c }}>
+            <div className="border-t border-[var(--hairline)] pt-4">
+              <p className="font-display text-3xl font-light tabular-nums" style={{ color: f.c }}>
                 {f.k}
               </p>
               <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{f.v}</p>
@@ -248,6 +249,30 @@ export default function LaborSites() {
           </Reveal>
         ))}
       </div>
+
+      <Reveal delay={80}>
+        <p className="mt-12 max-w-3xl text-sm leading-relaxed text-[var(--muted)]">
+          <strong className="font-semibold text-[var(--fg)]">Why this distribution?</strong>{" "}
+          Early work concentrated in BTL individual-level assistance because it
+          targeted bounded, execution-oriented tasks — camera control, editing,
+          animation, and asset manipulation — that are easy to isolate, build,
+          and evaluate in single-user settings. ATL, group-level, and cross-site
+          assistance emerged later because they involve harder-to-formalize
+          labor: creative direction, coordination, and intent alignment across
+          roles. This post-2022 diversification tracks the rise of generative
+          AI, which should be seen as an <em className="font-display italic">accelerator</em>.
+        </p>
+      </Reveal>
     </section>
+  );
+}
+
+function AxisTick({ children, top }: { children: React.ReactNode; top?: boolean }) {
+  return (
+    <div className={`flex items-center gap-2 ${top ? "" : ""}`}>
+      <span className="font-mono text-xs font-medium tracking-wide text-[var(--muted)]">
+        {children}
+      </span>
+    </div>
   );
 }

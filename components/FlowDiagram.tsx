@@ -176,7 +176,7 @@ export default function FlowDiagram() {
     !hover || r.from === hover || r.to === hover;
 
   return (
-    <section id="synthesis" className="relative mx-auto max-w-6xl px-5 py-28 sm:py-36">
+    <section id="synthesis" className="relative mx-auto max-w-[var(--maxw)] px-6 py-28 sm:py-36">
       <SectionHeader
         eyebrow="Synthesis"
         num="04"

@@ -3,14 +3,14 @@
 import { LAYERS, CORPUS } from "@/lib/data";
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
-import Figure from "./Figure";
+import ResearchLandscape from "./ResearchLandscape";
 import { useInView, useCountUp } from "./hooks";
 
 const LAYER_ACCENT = ["var(--atl-ind)", "var(--struct)", "var(--meaning)"];
 
 export default function Framework() {
   return (
-    <section id="framework" className="relative mx-auto max-w-6xl px-5 py-28 sm:py-36">
+    <section id="framework" className="relative mx-auto max-w-[var(--maxw)] px-6 py-28 sm:py-36">
       <SectionHeader
         eyebrow="The Framework"
         num="00"
@@ -33,20 +33,17 @@ export default function Framework() {
         </p>
       </SectionHeader>
 
-      {/* corpus stats + landscape figure */}
-      <div className="mt-14 grid items-center gap-8 lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="grid grid-cols-3 gap-3">
-          <Stat value={CORPUS.total} label="systems surveyed" suffix="" />
-          <Stat value={5} label="years, 2021–2025" suffix="" />
-          <Stat value={9} label="publication venues" suffix="" />
+      {/* corpus stats + interactive research landscape */}
+      <div className="mt-14 grid items-start gap-8 lg:grid-cols-[0.72fr_1.28fr]">
+        <div className="grid grid-cols-3 gap-3 lg:grid-cols-1">
+          <Stat value={CORPUS.total} label="systems surveyed" />
+          <Stat value={3} label="analytical layers" />
+          <Stat value={9} label="publication venues" />
         </div>
         <Reveal>
-          <Figure
-            src="/figures/landscape.jpg"
-            alt="Research landscape: the 31 surveyed systems plotted by quadrant and recency."
-            caption="The surveyed corpus, plotted by labor-site quadrant and recency of publication (from the PQE deck)."
-            ratio={1788 / 1030}
-          />
+          <div className="card p-5 sm:p-6">
+            <ResearchLandscape />
+          </div>
         </Reveal>
       </div>
 
@@ -65,7 +62,7 @@ export default function Framework() {
                 <span
                   className="font-display flex h-12 w-12 items-center justify-center rounded-xl text-xl font-medium italic"
                   style={{
-                    background: "rgba(255,255,255,0.04)",
+                    background: "var(--fill-1)",
                     border: "1px solid var(--border)",
                     color: LAYER_ACCENT[i],
                   }}
@@ -119,24 +116,15 @@ export default function Framework() {
   );
 }
 
-function Stat({
-  value,
-  label,
-  suffix,
-}: {
-  value: number;
-  label: string;
-  suffix: string;
-}) {
+function Stat({ value, label }: { value: number; label: string }) {
   const [ref, inView] = useInView<HTMLDivElement>(0.4);
   const v = useCountUp(value, inView);
   return (
-    <div ref={ref} className="card p-4 text-center">
-      <p className="font-display text-4xl font-medium tabular-nums sm:text-5xl">
+    <div ref={ref} className="card flex items-baseline gap-3 p-4 lg:flex-col lg:items-start lg:gap-1 lg:p-5">
+      <p className="font-display text-4xl font-light tabular-nums sm:text-5xl">
         {Math.round(v)}
-        {suffix}
       </p>
-      <p className="mt-1 text-[0.7rem] leading-tight text-[var(--muted)]">
+      <p className="text-[0.72rem] leading-tight text-[var(--muted)]">
         {label}
       </p>
     </div>

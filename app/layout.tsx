@@ -6,7 +6,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 
 const display = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600"],
   style: ["normal", "italic"],
   variable: "--font-display",
   display: "swap",
