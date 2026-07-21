@@ -184,9 +184,10 @@ export default function ResearchLandscape() {
       {/* axis caption + legend */}
       <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
         <figcaption className="text-xs leading-relaxed text-[var(--faint)]">
-          The corpus mapped by labor site and year — node size reflects labor
-          scope. Hover for details; click any node to open its paper. The ringed
-          node marks the most-cited system, Dramatron.
+          The corpus mapped by labor site and year — node size reflects the
+          number of labor types a system covers. Hover for details; click any
+          node to open its paper. The ringed node marks the most-cited system,
+          Dramatron.
         </figcaption>
         <span className="label whitespace-nowrap">More recent →</span>
       </div>

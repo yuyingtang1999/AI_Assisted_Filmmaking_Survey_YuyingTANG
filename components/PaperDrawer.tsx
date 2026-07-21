@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
+import PaperPlaceholder from "./PaperPlaceholder";
 import {
   TYPES,
   siteById,
@@ -54,22 +55,26 @@ export default function PaperDrawer({
       >
         {paper && site && (
           <>
-            {img && (
-              <div className="relative -mx-6 -mt-6 mb-5 aspect-[16/9] overflow-hidden border-b border-[var(--border)] sm:-mx-7 sm:-mt-7">
-                <Image
-                  src={img}
-                  alt={`${paper.name} system`}
-                  fill
-                  sizes="(max-width: 640px) 100vw, 448px"
-                  style={{ objectFit: "cover" }}
-                  priority
-                />
-                <span
-                  className="absolute inset-x-0 bottom-0 h-16"
-                  style={{ background: "linear-gradient(transparent, var(--bg-2))" }}
-                />
-              </div>
-            )}
+            <div className="relative -mx-6 -mt-6 mb-5 aspect-[16/9] overflow-hidden border-b border-[var(--border)] sm:-mx-7 sm:-mt-7">
+              {img ? (
+                <>
+                  <Image
+                    src={img}
+                    alt={`${paper.name} system`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 448px"
+                    style={{ objectFit: "cover" }}
+                    priority
+                  />
+                  <span
+                    className="absolute inset-x-0 bottom-0 h-16"
+                    style={{ background: "linear-gradient(transparent, var(--bg-2))" }}
+                  />
+                </>
+              ) : (
+                <PaperPlaceholder paper={paper} />
+              )}
+            </div>
             <div className="flex items-start justify-between gap-4">
               <span
                 className="rounded-full px-3 py-1 text-xs font-semibold"
@@ -93,7 +98,7 @@ export default function PaperDrawer({
               </button>
             </div>
 
-            <h3 className="mt-4 text-2xl font-semibold tracking-tight">
+            <h3 className="font-display mt-4 text-[1.7rem] font-normal leading-tight tracking-tight">
               {paper.name}
             </h3>
             <p className="mt-1 text-sm text-[var(--muted)]">
@@ -111,7 +116,7 @@ export default function PaperDrawer({
 
             {/* labor types */}
             <div className="mt-6">
-              <p className="text-xs uppercase tracking-widest text-[var(--faint)]">
+              <p className="label">
                 Labor types in scope
               </p>
               <div className="mt-2 flex flex-wrap gap-1.5">
@@ -133,7 +138,7 @@ export default function PaperDrawer({
 
             {/* allocation table */}
             <div className="mt-6">
-              <p className="text-xs uppercase tracking-widest text-[var(--faint)]">
+              <p className="label">
                 Human–AI allocation
               </p>
               <div className="mt-2 overflow-hidden rounded-xl border border-[var(--border)]">

@@ -110,7 +110,7 @@ export default function LaborSites() {
                           <RoleIcons id={id} />
                         </span>
                         <span
-                          className="font-display text-3xl font-light tabular-nums"
+                          className="font-display text-3xl font-semibold tabular-nums"
                           style={{ color: s.accent }}
                         >
                           {s.pct}
@@ -150,7 +150,7 @@ export default function LaborSites() {
                     Systems spanning ATL &amp; BTL roles at once
                   </p>
                 </div>
-                <span className="font-display text-xl font-light">2 / 31</span>
+                <span className="font-display text-xl font-semibold">2 / 31</span>
               </button>
 
               <p className="label mt-3 text-center">Assistance Context →</p>
@@ -188,7 +188,7 @@ export default function LaborSites() {
               </span>
               <div className="mt-4 flex items-baseline gap-3">
                 <span
-                  className="font-display text-5xl font-light tabular-nums"
+                  className="font-display text-5xl font-semibold tabular-nums"
                   style={{ color: site.accent }}
                 >
                   {site.pct}
@@ -235,13 +235,13 @@ export default function LaborSites() {
 
       <div className="mt-12 grid gap-4 sm:grid-cols-3">
         {[
-          { k: "58.1%", v: "The corpus stays concentrated in BTL individual-level support — bounded, execution-oriented tasks that are easy to isolate and evaluate.", c: "var(--btl-ind)" },
-          { k: "BTL › ATL", v: "BTL assistance is far more common than ATL. Creative direction resists formalization; operational craft does not.", c: "var(--atl-ind)" },
-          { k: "2 / 31", v: "Cross-site positioning is still rare. Only two systems span multiple labor sites — an emerging, post-GenAI frontier.", c: "var(--cross)" },
+          { k: "58.1%", v: "The corpus remains concentrated in BTL individual-level support — bounded, execution-oriented tasks that are easier to isolate, build, and evaluate.", c: "var(--btl-ind)" },
+          { k: "BTL › ATL", v: "Individual assistance dominates over group assistance, and BTL assistance is more common than ATL assistance.", c: "var(--atl-ind)" },
+          { k: "2 / 31", v: "Cross-site positioning is still rare, with only two systems spanning multiple labor sites.", c: "var(--cross)" },
         ].map((f, i) => (
           <Reveal key={i} delay={i * 90}>
             <div className="border-t border-[var(--hairline)] pt-4">
-              <p className="font-display text-3xl font-light tabular-nums" style={{ color: f.c }}>
+              <p className="font-display text-3xl font-semibold tabular-nums" style={{ color: f.c }}>
                 {f.k}
               </p>
               <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{f.v}</p>

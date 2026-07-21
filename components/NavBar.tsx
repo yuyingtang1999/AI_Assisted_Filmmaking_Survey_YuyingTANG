@@ -69,8 +69,8 @@ export default function NavBar() {
             </svg>
           </span>
           <span className="font-display text-[0.95rem] font-medium tracking-tight">
-            Algorithm{" "}
-            <span className="italic text-[var(--muted)]">behind the Lens</span>
+            The Labor Landscape{" "}
+            <span className="italic text-[var(--muted)]">of AI-Assisted Filmmaking</span>
           </span>
         </button>
 

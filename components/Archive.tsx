@@ -16,6 +16,7 @@ import {
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
 import PaperDrawer from "./PaperDrawer";
+import PaperPlaceholder from "./PaperPlaceholder";
 import { useTilt } from "./hooks";
 
 type GroupMode = "site" | "year" | "none";
@@ -132,7 +133,7 @@ export default function Archive() {
 
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-[var(--border)] pt-4">
             <div className="flex items-center gap-2">
-              <span className="text-xs uppercase tracking-widest text-[var(--faint)]">
+              <span className="label">
                 Group by
               </span>
               {(["site", "year", "none"] as GroupMode[]).map((m) => (
@@ -223,7 +224,7 @@ function FilterRow({
 }) {
   return (
     <div className="flex flex-col gap-2 py-1.5 sm:flex-row sm:items-center">
-      <span className="w-24 shrink-0 text-xs uppercase tracking-widest text-[var(--faint)]">
+      <span className="label w-24 shrink-0">
         {label}
       </span>
       <div className="flex flex-wrap gap-1.5">{children}</div>
@@ -273,22 +274,26 @@ function PaperCard({ p, onDetails }: { p: Paper; onDetails: () => void }) {
       style={{ borderColor: "var(--border)", transform: tilt.style, transformStyle: "preserve-3d" }}
       title={`Open ${p.name} — opens the paper (DOI) in a new tab`}
     >
-      {img && (
-        <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-[var(--border)]">
-          <Image
-            src={img}
-            alt={`${p.name} system`}
-            fill
-            sizes="(max-width: 640px) 100vw, 360px"
-            style={{ objectFit: "cover" }}
-            className="transition-transform duration-500 group-hover:scale-105"
-          />
-          <span
-            className="absolute inset-x-0 bottom-0 h-10"
-            style={{ background: "linear-gradient(transparent, rgba(10,13,22,0.85))" }}
-          />
-        </div>
-      )}
+      <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-[var(--border)]">
+        {img ? (
+          <>
+            <Image
+              src={img}
+              alt={`${p.name} system`}
+              fill
+              sizes="(max-width: 640px) 100vw, 360px"
+              style={{ objectFit: "cover" }}
+              className="transition-transform duration-500 group-hover:scale-105"
+            />
+            <span
+              className="absolute inset-x-0 bottom-0 h-10"
+              style={{ background: "linear-gradient(transparent, rgba(10,13,22,0.55))" }}
+            />
+          </>
+        ) : (
+          <PaperPlaceholder paper={p} className="transition-transform duration-500 group-hover:scale-105" />
+        )}
+      </div>
       <div className="relative flex flex-1 flex-col p-4">
       <span
         className="absolute inset-y-0 left-0 w-1 transition-all group-hover:w-1.5"

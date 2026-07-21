@@ -1,16 +1,16 @@
 export default function Footer() {
   return (
-    <footer className="border-t border-[var(--border)] px-5 py-10">
-      <div className="mx-auto flex max-w-[var(--maxw)] flex-col items-start justify-between gap-4 text-sm sm:flex-row sm:items-center">
+    <footer className="mt-8 border-t border-[var(--border)]">
+      <div className="mx-auto flex max-w-[var(--maxw)] flex-col items-start justify-between gap-5 px-6 py-12 sm:flex-row sm:items-end">
         <div>
-          <p className="font-semibold">Algorithm behind the Lens</p>
-          <p className="mt-1 text-xs text-[var(--muted)]">
-            Mapping the Labor Landscape of AI-Assisted Filmmaking · Yuying Tang
+          <p className="font-display text-lg font-normal">
+            Mapping the Labor Landscape of AI-Assisted Filmmaking
+          </p>
+          <p className="mt-1.5 text-sm text-[var(--muted)]">
+            Yuying Tang · Supervised by Prof. Huamin Qu &amp; Prof. Xiaojuan Ma
           </p>
         </div>
-        <p className="text-xs text-[var(--faint)]">
-          Survey corpus: 31 systems, 2021–2025 · Built with Next.js
-        </p>
+        <p className="label">Survey corpus · 31 systems · through 2025</p>
       </div>
     </footer>
   );

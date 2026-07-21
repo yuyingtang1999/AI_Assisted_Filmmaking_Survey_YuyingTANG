@@ -28,7 +28,6 @@ export default function LaborAllocation() {
   const total = c["Human Only"] + c.HA + c["AI Only"];
   const t = typeById(active);
 
-  const humanShare = ((c["Human Only"] + c.HA * 0.5) / (total || 1)) * 100;
 
   return (
     <section id="allocation" className="relative mx-auto max-w-[var(--maxw)] px-6 py-28 sm:py-36">
@@ -132,32 +131,32 @@ export default function LaborAllocation() {
               </span>
             </div>
 
-            {/* tug-of-war bar */}
+            {/* allocation split bar (real proportions) */}
             <div className="mt-6">
               <div className="flex justify-between text-xs font-medium">
                 <span className="flex items-center gap-1.5 text-[var(--fg)]">
-                  <HumanIcon /> Human
+                  <HumanIcon /> Human-led
                 </span>
                 <span className="flex items-center gap-1.5 text-[var(--fg)]">
-                  AI <AiIcon />
+                  AI-led <AiIcon />
                 </span>
               </div>
-              <div className="relative mt-2 h-4 w-full overflow-hidden rounded-full bg-[var(--track)]">
-                <div
-                  className="absolute inset-y-0 left-0 rounded-full transition-all duration-500"
-                  style={{
-                    width: `${humanShare}%`,
-                    background:
-                      "linear-gradient(90deg, #3b4a6b, #2f8f7f)",
-                  }}
-                />
-                <div
-                  className="absolute inset-y-0 z-10 w-0.5 -translate-x-1/2 bg-[var(--divider)] transition-all duration-500"
-                  style={{ left: `${humanShare}%` }}
-                />
+              <div className="mt-2 flex h-4 w-full overflow-hidden rounded-full bg-[var(--track)]">
+                {ALLOCATIONS.map((a) => {
+                  const w = total ? (c[a.id] / total) * 100 : 0;
+                  return (
+                    <div
+                      key={a.id}
+                      className="h-full transition-all duration-500"
+                      style={{ width: `${w}%`, background: a.color }}
+                      title={`${a.label}: ${c[a.id]}`}
+                    />
+                  );
+                })}
               </div>
               <p className="mt-2 text-center text-xs text-[var(--faint)]">
-                {Math.round(humanShare)}% human-weighted control
+                Share of {total} system{total === 1 ? "" : "s"} that bring{" "}
+                {t.id.toLowerCase()} labor into scope
               </p>
             </div>
 

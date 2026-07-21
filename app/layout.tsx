@@ -1,32 +1,34 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import { Source_Serif_4, Source_Sans_3, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import CursorGlow from "@/components/CursorGlow";
 import ScrollProgress from "@/components/ScrollProgress";
 
-const display = Fraunces({
+const display = Source_Serif_4({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
   variable: "--font-display",
   display: "swap",
 });
-const sans = Inter({
+const sans = Source_Sans_3({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
   display: "swap",
 });
 const mono = JetBrains_Mono({
   subsets: ["latin"],
+  weight: ["400", "500"],
   variable: "--font-mono",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title:
-    "Algorithm behind the Lens — Mapping the Labor Landscape of AI-Assisted Filmmaking",
+    "Mapping the Labor Landscape of AI-Assisted Filmmaking — Yuying Tang",
   description:
-    "An interactive survey of 31 AI-assisted filmmaking systems (2021–2025) by Yuying Tang, mapping labor sites, labor types, and human–AI labor allocation.",
+    "A survey of AI-assisted filmmaking systems by Yuying Tang: labor sites, labor types, and human–AI labor allocation.",
 };
 
 export default function RootLayout({

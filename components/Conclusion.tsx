@@ -4,20 +4,23 @@ import SectionHeader from "./SectionHeader";
 const TAKEAWAYS = [
   {
     n: "01",
-    title: "AI is an accelerator, not an absolute creator.",
-    body: "Across the corpus, meaning-making stays human-led. Generative models widen the space of options and speed execution, but the final creative judgment remains a human act.",
-    color: "var(--exec)",
+    label: "On labor sites",
+    title: "Assistance stays concentrated in below-the-line, individual craft.",
+    body: "58.1% of systems target BTL individual-level work; ATL, group-level, and cross-site assistance remain comparatively rare, with only two systems spanning multiple labor sites.",
+    color: "var(--btl-ind)",
   },
   {
     n: "02",
-    title: "The missing piece is relational labor.",
-    body: "Coordination, hand-off, and trust between roles are barely supported. Relational labor appears only at group sites and almost never leaves human hands — a wide-open design frontier.",
-    color: "var(--relational)",
+    label: "On labor types",
+    title: "Support broadened from a stable executional core toward structure and meaning.",
+    body: "Execution is always in scope; structural and meaning-making support grew over time, while relational labor remained limited and appears only at group sites.",
+    color: "var(--struct)",
   },
   {
     n: "03",
-    title: "Job displacement and ethics remain unresolved.",
-    body: "Copyright, transparency, and creative-labor markets surface repeatedly as challenges. As AI reaches from execution toward authorship, these questions grow more urgent.",
+    label: "On labor allocation",
+    title: "Collaboration concentrates in execution; meaning and relations stay human-led.",
+    body: "Human–AI collaboration clusters in executional and structural work; meaning-making and relational labor remain human-led, and AI-only delegation concentrates in BTL execution.",
     color: "var(--meaning)",
   },
 ];
@@ -26,18 +29,18 @@ export default function Conclusion() {
   return (
     <section id="conclusion" className="relative mx-auto max-w-[var(--maxw)] px-6 py-28 sm:py-36">
       <SectionHeader
-        eyebrow="Future Directions"
+        eyebrow="Conclusion"
         num="06"
         accent="var(--exec)"
         title={
           <>
-            Where this <em>points</em>
+            What the survey <em>finds</em>
           </>
         }
       >
         <p className="lede">
-          Three through-lines emerge from the survey — one about AI&apos;s role,
-          one about what is still missing, and one about what remains at stake.
+          Three findings, one per layer of the taxonomy — on where assistance
+          sits, what labor it performs, and how that labor is allocated.
         </p>
       </SectionHeader>
 
@@ -47,13 +50,14 @@ export default function Conclusion() {
             <div className="grid grid-cols-1 gap-4 border-t border-[var(--hairline)] py-8 sm:grid-cols-12 sm:gap-8">
               <div className="sm:col-span-3">
                 <span
-                  className="font-display text-5xl font-normal italic tabular-nums sm:text-6xl"
+                  className="font-display text-5xl font-semibold tabular-nums sm:text-6xl"
                   style={{ color: t.color }}
                 >
                   {t.n}
                 </span>
+                <p className="label mt-2">{t.label}</p>
               </div>
-              <h3 className="font-display text-2xl font-normal leading-snug tracking-tight sm:col-span-5 sm:text-[1.7rem]">
+              <h3 className="font-display text-xl font-semibold leading-snug tracking-tight sm:col-span-5 sm:text-[1.5rem]">
                 {t.title}
               </h3>
               <p className="text-sm leading-relaxed text-[var(--muted)] sm:col-span-4 sm:pt-2">
@@ -65,8 +69,18 @@ export default function Conclusion() {
         <div className="border-t border-[var(--hairline)]" />
       </div>
 
+      <Reveal delay={60}>
+        <p className="prose-measure mt-10 text-sm leading-relaxed text-[var(--faint)]">
+          Across these shifts, generative AI is best understood as an{" "}
+          <em className="font-display italic">accelerator</em> — extending AI
+          support from narrow execution toward ideation and higher-level creative
+          work, and making ATL-facing, group-level, and cross-site systems more
+          feasible.
+        </p>
+      </Reveal>
+
       <Reveal delay={80}>
-        <div className="mt-14 flex flex-col items-start gap-5 rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col items-start gap-5 rounded-xl border border-[var(--border)] bg-[var(--panel)] p-8 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="font-display text-xl font-medium">Take the data with you</p>
             <p className="mt-1 max-w-md text-sm text-[var(--muted)]">
