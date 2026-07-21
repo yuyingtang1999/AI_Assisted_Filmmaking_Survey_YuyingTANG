@@ -76,7 +76,7 @@ export default function LaborTypes() {
                     {c}
                   </span>
                 </div>
-                <h3 className="mt-4 text-base font-semibold">{t.id}</h3>
+                <h3 className="font-display mt-4 text-xl font-normal tracking-tight">{t.id}</h3>
                 <p className="mt-2 text-[0.82rem] leading-relaxed text-[var(--muted)]">
                   {t.definition}
                 </p>

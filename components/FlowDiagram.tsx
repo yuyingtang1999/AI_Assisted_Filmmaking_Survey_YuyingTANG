@@ -199,7 +199,7 @@ export default function FlowDiagram() {
 
       <Reveal delay={80}>
         <div className="card mt-12 overflow-x-auto p-4 sm:p-6">
-          <div className="mb-3 flex justify-between px-1 text-xs font-medium uppercase tracking-widest text-[var(--faint)]">
+          <div className="label mb-3 flex justify-between px-1">
             <span>Labor Sites</span>
             <span>Labor Types</span>
             <span>Allocation</span>
@@ -278,8 +278,8 @@ export default function FlowDiagram() {
           <strong className="text-[var(--btl-ind)]">BTL Individual</strong> →{" "}
           <strong className="text-[var(--exec)]">Executional</strong> →{" "}
           <strong className="text-[#2f8f7f]">Human–AI Collaboration</strong>.
-          Relational threads appear only from group sites and terminate almost
-          entirely in human-only work.
+          Relational threads appear only from group sites and remain entirely
+          human-only.
         </p>
       </Reveal>
     </section>
