@@ -1,18 +1,14 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import {
   SITES,
   PAPERS,
   siteById,
-  paperImage,
   type SiteId,
 } from "@/lib/data";
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
-
-const CELL_ORDER: SiteId[] = ["atl-ind", "atl-grp", "btl-ind", "btl-grp"];
 
 /* compact line-icons per quadrant (ink glyphs) */
 function RoleIcons({ id }: { id: SiteId }) {
@@ -37,10 +33,45 @@ export default function LaborSites() {
   const cross = useMemo(() => PAPERS.filter((p) => p.site === "cross"), []);
   const shown = active === "cross" ? cross : papers;
 
-  const exemplar = useMemo(() => {
-    const withImg = shown.find((p) => paperImage(p.id));
-    return withImg ? { name: withImg.name, src: paperImage(withImg.id)! } : null;
-  }, [shown]);
+  const renderCell = (id: SiteId) => {
+    const s = siteById(id);
+    const on = active === id;
+    return (
+      <button
+        key={id}
+        onMouseEnter={() => setActive(id)}
+        onFocus={() => setActive(id)}
+        onClick={() => setActive(id)}
+        className="group relative flex min-h-[178px] flex-col justify-between overflow-hidden rounded-xl p-4 text-left transition-all duration-300"
+        style={{
+          background: s.soft,
+          outline: on ? `2px solid ${s.accent}` : "1px solid var(--border)",
+          outlineOffset: on ? "-1px" : "0",
+          boxShadow: on ? "var(--card-shadow)" : "none",
+          transform: on ? "translateY(-3px)" : "none",
+          color: "#20242c",
+        }}
+      >
+        <div className="flex items-start justify-between">
+          <span style={{ color: s.accent }}>
+            <RoleIcons id={id} />
+          </span>
+          <span className="font-display text-3xl font-semibold tabular-nums" style={{ color: s.accent }}>
+            {s.pct}
+          </span>
+        </div>
+        <div>
+          <p className="text-[0.82rem] font-semibold" style={{ color: s.accent }}>
+            {s.short}
+          </p>
+          <p className="mt-1 text-[0.72rem] font-medium leading-snug text-[#3a4048]">{s.focus}</p>
+          <p className="mt-1.5 text-[0.68rem] text-[#5c636d]">
+            e.g. {s.roles} · {s.count}/{PAPERS.length}
+          </p>
+        </div>
+      </button>
+    );
+  };
 
   return (
     <section id="sites" className="relative mx-auto max-w-[var(--maxw)] px-6 py-28 sm:py-36">
@@ -64,79 +95,48 @@ export default function LaborSites() {
       </SectionHeader>
 
       <div className="mt-16 grid gap-10 lg:grid-cols-[1.15fr_0.85fr]">
-        {/* ---- native 2x2 diagram ---- */}
+        {/* ---- native 2x2 diagram (axis-aligned) ---- */}
         <Reveal>
-          <div className="flex gap-4">
-            {/* vertical axis */}
-            <div className="flex flex-col items-center">
-              <span className="label mb-3 whitespace-nowrap [writing-mode:vertical-rl] [transform:rotate(180deg)]">
+          <div className="flex gap-3">
+            {/* Production Position (vertical) */}
+            <div className="flex">
+              <span className="label self-center whitespace-nowrap [writing-mode:vertical-rl] [transform:rotate(180deg)]">
                 Production Position
               </span>
-              <div className="flex flex-1 flex-col justify-around">
-                <AxisTick top>ATL</AxisTick>
-                <AxisTick>BTL</AxisTick>
-              </div>
             </div>
 
-            <div className="flex-1">
-              <div className="mb-2 grid grid-cols-2">
-                {["Individual", "Group"].map((t) => (
-                  <span key={t} className="label text-center">{t}</span>
-                ))}
+            <div className="grid flex-1 grid-cols-[1.4rem_1fr] gap-x-3 gap-y-3">
+              {/* top axis labels */}
+              <div />
+              <div className="grid grid-cols-2">
+                <span className="label text-center">Individual</span>
+                <span className="label text-center">Group</span>
               </div>
 
+              {/* ATL row */}
+              <div className="flex items-center justify-center">
+                <span className="font-mono text-xs font-semibold text-[var(--muted)]">ATL</span>
+              </div>
               <div className="grid grid-cols-2 gap-3">
-                {CELL_ORDER.map((id) => {
-                  const s = siteById(id);
-                  const on = active === id;
-                  return (
-                    <button
-                      key={id}
-                      onMouseEnter={() => setActive(id)}
-                      onFocus={() => setActive(id)}
-                      onClick={() => setActive(id)}
-                      className="group relative flex min-h-[180px] flex-col justify-between overflow-hidden rounded-xl p-4 text-left transition-all duration-300"
-                      style={{
-                        background: s.soft,
-                        outline: on ? `2px solid ${s.accent}` : "1px solid var(--border)",
-                        outlineOffset: on ? "-1px" : "0",
-                        boxShadow: on ? "var(--card-shadow)" : "none",
-                        transform: on ? "translateY(-3px)" : "none",
-                        color: "#20242c",
-                      }}
-                    >
-                      <div className="flex items-start justify-between">
-                        <span style={{ color: s.accent }}>
-                          <RoleIcons id={id} />
-                        </span>
-                        <span
-                          className="font-display text-3xl font-semibold tabular-nums"
-                          style={{ color: s.accent }}
-                        >
-                          {s.pct}
-                        </span>
-                      </div>
-                      <div>
-                        <p className="text-[0.82rem] font-semibold" style={{ color: s.accent }}>
-                          {s.short}
-                        </p>
-                        <p className="mt-1 text-[0.72rem] font-medium leading-snug text-[#3a4048]">
-                          {s.focus}
-                        </p>
-                        <p className="mt-1.5 text-[0.68rem] text-[#5c636d]">
-                          {s.roles} · {s.count}/{PAPERS.length}
-                        </p>
-                      </div>
-                    </button>
-                  );
-                })}
+                {renderCell("atl-ind")}
+                {renderCell("atl-grp")}
+              </div>
+
+              {/* BTL row */}
+              <div className="flex items-center justify-center">
+                <span className="font-mono text-xs font-semibold text-[var(--muted)]">BTL</span>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                {renderCell("btl-ind")}
+                {renderCell("btl-grp")}
               </div>
 
               {/* cross-site */}
+              <div />
               <button
                 onMouseEnter={() => setActive("cross")}
                 onClick={() => setActive("cross")}
-                className="mt-3 flex w-full items-center justify-between rounded-xl p-4 text-left transition-all"
+                className="flex w-full items-center justify-between rounded-xl p-4 text-left transition-all"
                 style={{
                   background: siteById("cross").soft,
                   outline: active === "cross" ? "2px solid var(--cross)" : "1px solid var(--border)",
@@ -153,7 +153,9 @@ export default function LaborSites() {
                 <span className="font-display text-xl font-semibold">2 / 31</span>
               </button>
 
-              <p className="label mt-3 text-center">Assistance Context →</p>
+              {/* bottom axis label */}
+              <div />
+              <p className="label text-center">Assistance Context</p>
             </div>
           </div>
         </Reveal>
@@ -164,21 +166,6 @@ export default function LaborSites() {
             className="card h-full overflow-hidden"
             style={{ borderColor: `${site.accent}44` }}
           >
-            {exemplar && (
-              <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-[var(--border)]">
-                <Image
-                  key={exemplar.src}
-                  src={exemplar.src}
-                  alt={`${exemplar.name} — representative system`}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 420px"
-                  style={{ objectFit: "cover" }}
-                />
-                <span className="absolute bottom-2 left-3 rounded bg-black/60 px-2 py-1 text-[0.68rem] font-medium text-white backdrop-blur">
-                  e.g. {exemplar.name}
-                </span>
-              </div>
-            )}
             <div className="p-6">
               <span
                 className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold"
@@ -201,7 +188,9 @@ export default function LaborSites() {
               <dl className="mt-5 grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <dt className="label">Roles assisted</dt>
-                  <dd className="mt-1 font-medium">{site.roles}</dd>
+                  <dd className="mt-1 font-medium">
+                    {active === "cross" ? site.roles : `e.g. ${site.roles}`}
+                  </dd>
                 </div>
                 <div>
                   <dt className="label">Core focus</dt>
@@ -264,15 +253,5 @@ export default function LaborSites() {
         </p>
       </Reveal>
     </section>
-  );
-}
-
-function AxisTick({ children, top }: { children: React.ReactNode; top?: boolean }) {
-  return (
-    <div className={`flex items-center gap-2 ${top ? "" : ""}`}>
-      <span className="font-mono text-xs font-medium tracking-wide text-[var(--muted)]">
-        {children}
-      </span>
-    </div>
   );
 }
