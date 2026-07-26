@@ -1,14 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import {
   PAPERS,
   SITES,
   TYPES,
   siteById,
   typeById,
-  paperImage,
   type Paper,
   type SiteId,
   type LaborType,
@@ -16,8 +14,6 @@ import {
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
 import PaperDrawer from "./PaperDrawer";
-import PaperPlaceholder from "./PaperPlaceholder";
-import { useTilt } from "./hooks";
 
 type GroupMode = "site" | "year" | "none";
 
@@ -123,7 +119,7 @@ export default function Archive() {
               <Toggle
                 key={v}
                 on={venues.has(v)}
-                color="#8a93a6"
+                color="var(--cross)"
                 onClick={() => setVenues(toggle(venues, v))}
               >
                 {v}
@@ -260,69 +256,30 @@ function Toggle({
 
 function PaperCard({ p, onDetails }: { p: Paper; onDetails: () => void }) {
   const site = siteById(p.site);
-  const img = paperImage(p.id);
-  const tilt = useTilt<HTMLAnchorElement>(5);
   return (
     <a
-      ref={tilt.ref}
-      onMouseMove={tilt.onMove}
-      onMouseLeave={tilt.onLeave}
       href={p.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="card card-hover group relative flex flex-col overflow-hidden"
-      style={{ borderColor: "var(--border)", transform: tilt.style, transformStyle: "preserve-3d" }}
+      className="card card-hover group relative flex flex-col overflow-hidden p-4 pl-5"
       title={`Open ${p.name} — opens the paper (DOI) in a new tab`}
     >
-      <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-[var(--border)]">
-        {img ? (
-          <>
-            <Image
-              src={img}
-              alt={`${p.name} system`}
-              fill
-              sizes="(max-width: 640px) 100vw, 360px"
-              style={{ objectFit: "cover" }}
-              className="transition-transform duration-500 group-hover:scale-105"
-            />
-            <span
-              className="absolute inset-x-0 bottom-0 h-10"
-              style={{ background: "linear-gradient(transparent, rgba(10,13,22,0.55))" }}
-            />
-          </>
-        ) : (
-          <PaperPlaceholder paper={p} className="transition-transform duration-500 group-hover:scale-105" />
-        )}
-      </div>
-      <div className="relative flex flex-1 flex-col p-4">
       <span
         className="absolute inset-y-0 left-0 w-1 transition-all group-hover:w-1.5"
         style={{ background: site.accent }}
       />
-      <div className="flex items-start justify-between gap-2 pl-1">
+      <div className="flex items-start justify-between gap-2">
         <h4 className="text-sm font-semibold leading-tight">{p.name}</h4>
         <svg
           className="mt-0.5 shrink-0 text-[var(--faint)] transition-colors group-hover:text-[var(--fg)]"
-          width="14"
-          height="14"
-          viewBox="0 0 14 14"
-          fill="none"
+          width="14" height="14" viewBox="0 0 14 14" fill="none"
         >
-          <path
-            d="M5 3h6v6M11 3L4 10"
-            stroke="currentColor"
-            strokeWidth="1.4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+          <path d="M5 3h6v6M11 3L4 10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
 
-      <div className="mt-2 flex flex-wrap items-center gap-2 pl-1 text-[0.7rem] text-[var(--muted)]">
-        <span
-          className="rounded px-1.5 py-0.5"
-          style={{ background: `${site.accent}22`, color: site.accent }}
-        >
+      <div className="mt-2 flex flex-wrap items-center gap-2 text-[0.7rem] text-[var(--muted)]">
+        <span className="rounded px-1.5 py-0.5" style={{ background: `${site.accent}22`, color: site.accent }}>
           {site.short}
         </span>
         <span>{p.venue}</span>
@@ -330,21 +287,12 @@ function PaperCard({ p, onDetails }: { p: Paper; onDetails: () => void }) {
         <span>{p.year}</span>
       </div>
 
-      {p.tag && (
-        <p className="mt-2 pl-1 text-[0.7rem] italic text-[var(--faint)]">
-          {p.tag}
-        </p>
-      )}
+      {p.tag && <p className="mt-2 text-[0.7rem] italic text-[var(--faint)]">{p.tag}</p>}
 
-      <div className="mt-3 flex items-center justify-between pl-1">
+      <div className="mt-3 flex items-center justify-between">
         <div className="flex gap-1">
           {p.laborTypes.map((t) => (
-            <span
-              key={t}
-              className="h-2 w-2 rounded-full"
-              style={{ background: typeById(t).color }}
-              title={t}
-            />
+            <span key={t} className="h-2 w-2 rounded-full" style={{ background: typeById(t).color }} title={t} />
           ))}
         </div>
         <button
@@ -357,7 +305,6 @@ function PaperCard({ p, onDetails }: { p: Paper; onDetails: () => void }) {
         >
           Details
         </button>
-      </div>
       </div>
     </a>
   );

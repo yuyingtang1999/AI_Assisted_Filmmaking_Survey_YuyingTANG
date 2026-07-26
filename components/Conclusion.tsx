@@ -19,8 +19,8 @@ const TAKEAWAYS = [
   {
     n: "03",
     label: "On labor allocation",
-    title: "Collaboration concentrates in execution; meaning and relations stay human-led.",
-    body: "Human–AI collaboration clusters in executional and structural work; meaning-making and relational labor remain human-led, and AI-only delegation concentrates in BTL execution.",
+    title: "Collaboration concentrates in execution; meaning and relations stay human-only.",
+    body: "Human–AI collaboration clusters in executional and structural work; for meaning-making the human-only share is largest and relational labor is entirely human-only, while AI-only delegation concentrates in BTL execution.",
     color: "var(--meaning)",
   },
 ];

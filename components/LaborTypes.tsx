@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { TYPES, YEARS, PAPERS, type LaborType } from "@/lib/data";
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
-import Figure from "./Figure";
+import TypeCoverageChart from "./TypeCoverageChart";
 
 export default function LaborTypes() {
   const [yearIdx, setYearIdx] = useState(YEARS.length - 1);
@@ -103,11 +103,19 @@ export default function LaborTypes() {
       {/* timeline slider */}
       <Reveal delay={120}>
         <div className="card mt-10 p-6">
-          <div className="flex items-center justify-between">
-            <p className="text-sm font-medium text-[var(--muted)]">
-              Cumulative coverage through
-            </p>
-            <span className="font-mono text-2xl font-semibold tabular-nums">
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <p className="label flex items-center gap-1.5">
+                <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 7h10M8 3l4 4-4 4M6 11L2 7l4-4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                Drag or tap a year — interactive
+              </p>
+              <p className="mt-1.5 text-sm text-[var(--muted)]">
+                How many systems cover each labor type, up to
+              </p>
+            </div>
+            <span className="font-display text-3xl font-semibold tabular-nums">
               {year}
             </span>
           </div>
@@ -139,12 +147,9 @@ export default function LaborTypes() {
       </Reveal>
 
       <Reveal className="mt-12">
-        <Figure
-          src="/figures/types-by-site.jpg"
-          alt="Grouped bar chart of labor-type coverage across the four labor sites."
-          caption="Labor-type coverage across sites: execution is always in scope; structure and meaning cluster in ATL; relational labor appears only at group sites."
-          ratio={1489 / 747}
-        />
+        <div className="card p-5 sm:p-6">
+          <TypeCoverageChart />
+        </div>
       </Reveal>
 
       <Reveal delay={80}>

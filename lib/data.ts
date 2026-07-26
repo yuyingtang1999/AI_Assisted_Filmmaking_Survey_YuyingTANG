@@ -37,7 +37,7 @@ export const PAPERS: Paper[] = [
   { id: 24, name: "KinemaFX", venue: "UIST", year: 2025, url: "https://dl.acm.org/doi/10.1145/3746059.3747734", site: "btl-ind", laborTypes: ["Executional", "Structural", "Meaning-Making"], human: ["Executional", "Structural", "Meaning-Making"], ai: ["Executional", "Structural", "Meaning-Making"], allocation: { "Executional": "HA", "Structural": "HA", "Meaning-Making": "HA" } },
   { id: 25, name: "wr-AI-ter", venue: "IMX", year: 2024, url: "https://dl.acm.org/doi/10.1145/3639701.3656325", site: "atl-grp", laborTypes: ["Executional", "Structural", "Meaning-Making"], human: ["Executional", "Structural", "Meaning-Making"], ai: ["Executional", "Structural", "Meaning-Making"], allocation: { "Executional": "HA", "Structural": "HA", "Meaning-Making": "HA" } },
   { id: 26, name: "CollageVis", venue: "CHI", year: 2024, url: "https://dl.acm.org/doi/10.1145/3613904.3642575", site: "atl-grp", laborTypes: ["Executional", "Structural", "Meaning-Making", "Relational"], human: ["Executional", "Structural", "Meaning-Making", "Relational"], ai: ["Executional"], allocation: { "Executional": "HA", "Structural": "Human Only", "Meaning-Making": "Human Only", "Relational": "Human Only" }, desc: "Video-collage-based previsualization that lets indie filmmakers rapidly prototype and communicate film scenes for early idea exploration and production planning.", benefit: "Positions AI-assisted previs as team-facing coordination: faster shared understanding and easier alignment on layout and shots.", challenge: "Cannot replace 3D previs due to limited ability to simulate lighting, which can weaken cross-role decision confidence.", tag: "Relational labor · example" },
-  { id: 27, name: "CineVision", venue: "UIST", year: 2025, url: "https://dl.acm.org/doi/10.1145/3746059.3747793", site: "atl-grp", laborTypes: ["Executional", "Meaning-Making", "Relational"], human: ["Executional", "Meaning-Making", "Relational"], ai: ["Executional", "Structural", "Meaning-Making"], allocation: { "Executional": "HA", "Structural": "AI Only", "Meaning-Making": "HA", "Relational": "Human Only" }, desc: "Interactive pre-visualization storyboard system that acts as a shared, editable boundary object for Director\u2013Cinematographer collaboration.", benefit: "Real-time visual controls reduce back-and-forth between director and cinematographer.", challenge: "Narrow scope: supports the director-cinematographer dyad only.", tag: "ATL group-level · example" },
+  { id: 27, name: "CineVision", venue: "UIST", year: 2025, url: "https://dl.acm.org/doi/10.1145/3746059.3747793", site: "atl-grp", laborTypes: ["Executional", "Meaning-Making", "Relational"], human: ["Executional", "Meaning-Making", "Relational"], ai: ["Executional", "Structural", "Meaning-Making"], allocation: { "Executional": "HA", "Meaning-Making": "HA", "Relational": "Human Only" }, desc: "Interactive pre-visualization storyboard system that acts as a shared, editable boundary object for Director\u2013Cinematographer collaboration.", benefit: "Real-time visual controls reduce back-and-forth between director and cinematographer.", challenge: "Narrow scope: supports the director-cinematographer dyad only.", tag: "ATL group-level · example" },
   { id: 28, name: "AniCraft", venue: "UIST", year: 2024, url: "https://dl.acm.org/doi/10.1145/3654777.3676325", site: "btl-grp", laborTypes: ["Executional", "Structural", "Meaning-Making", "Relational"], human: ["Executional", "Structural", "Meaning-Making", "Relational"], ai: ["Executional", "Structural"], allocation: { "Executional": "HA", "Structural": "HA", "Meaning-Making": "Human Only", "Relational": "Human Only" }, desc: "Uses marker-tracked everyday objects in mixed reality to let production crafts and teams rapidly prototype and share 3D character animations for previs.", benefit: "Affordable tracking with everyday materials; faster, lower-skill previs for the whole team.", challenge: "Collaboration is framed in the walkthrough but not directly evaluated.", tag: "Labor-allocation · worked example" },
   { id: 29, name: "EditIQ", venue: "IUI", year: 2025, url: "https://dl.acm.org/doi/10.1145/3708359.3712113", site: "btl-grp", laborTypes: ["Executional", "Structural", "Meaning-Making"], human: [], ai: ["Executional", "Structural", "Meaning-Making"], allocation: { "Executional": "AI Only", "Structural": "AI Only", "Meaning-Making": "AI Only" } },
   { id: 30, name: "Paratrouper", venue: "CHI", year: 2025, url: "https://dl.acm.org/doi/10.1145/3706598.3714242", site: "cross", laborTypes: ["Executional", "Structural", "Meaning-Making"], human: ["Executional", "Structural", "Meaning-Making"], ai: ["Executional", "Structural"], allocation: { "Executional": "HA", "Structural": "HA", "Meaning-Making": "Human Only" }, desc: "Exploratory creation of character-cast visuals using generative AI, spanning ATL-individual, BTL-individual, and BTL-group sites via early reference artifacts.", benefit: "Supports cross-role alignment and coherent cast design through parallel multi-character exploration.", challenge: "Better suited to early exploration than precise downstream production, due to limited fine-grained control.", tag: "Latest, cross-site work" },
@@ -61,12 +61,13 @@ export interface SiteMeta {
   pct: string;
 }
 
+// Site palette matches the deck's Sankey (used consistently site-wide).
 export const SITES: SiteMeta[] = [
-  { id: "atl-ind", label: "ATL · Individual-Level", short: "ATL Individual", atl: true, group: false, accent: "#c0392b", soft: "#fdedec", roles: "Directors, Screenwriters", focus: "Narrative judgment & creative positioning", count: 6, pct: "19.4%" },
-  { id: "atl-grp", label: "ATL · Group-Level", short: "ATL Group", atl: true, group: true, accent: "#6c3483", soft: "#f4ecf7", roles: "Director + Cinematographer", focus: "Shared understanding & high-level convergence", count: 3, pct: "9.7%" },
-  { id: "btl-ind", label: "BTL · Individual-Level", short: "BTL Individual", atl: false, group: false, accent: "#d4762c", soft: "#fef5e7", roles: "Camera, Sound, VFX", focus: "Operational speed & concrete outputs", count: 18, pct: "58.1%" },
-  { id: "btl-grp", label: "BTL · Group-Level", short: "BTL Group", atl: false, group: true, accent: "#27856a", soft: "#e8f8f5", roles: "Gaffer, Grip, VFX team", focus: "Operational synchronization", count: 2, pct: "6.5%" },
-  { id: "cross", label: "Cross-Site", short: "Cross-Site", atl: false, group: true, accent: "#8a8f98", soft: "#eef0f2", roles: "Spanning ATL & BTL roles", focus: "Assistance spanning multiple labor sites", count: 2, pct: "6.5%" },
+  { id: "atl-ind", label: "ATL · Individual-Level", short: "ATL Individual", atl: true, group: false, accent: "#d97c5a", soft: "#f8e9e1", roles: "Directors, Screenwriters", focus: "Narrative judgment & creative positioning", count: 6, pct: "19.4%" },
+  { id: "atl-grp", label: "ATL · Group-Level", short: "ATL Group", atl: true, group: true, accent: "#6f9350", soft: "#e9f0e1", roles: "Director + Cinematographer", focus: "Shared understanding & high-level convergence", count: 3, pct: "9.7%" },
+  { id: "btl-ind", label: "BTL · Individual-Level", short: "BTL Individual", atl: false, group: false, accent: "#c3a96b", soft: "#f5efe1", roles: "Camera, Sound, VFX", focus: "Operational speed & concrete outputs", count: 18, pct: "58.1%" },
+  { id: "btl-grp", label: "BTL · Group-Level", short: "BTL Group", atl: false, group: true, accent: "#7196ac", soft: "#e8eef3", roles: "Gaffer, Grip, VFX team", focus: "Operational synchronization", count: 2, pct: "6.5%" },
+  { id: "cross", label: "Cross-Site", short: "Cross-Site", atl: false, group: true, accent: "#8f8f8f", soft: "#eeeeee", roles: "Spanning ATL & BTL roles", focus: "Assistance spanning multiple labor sites", count: 2, pct: "6.5%" },
 ];
 
 export const siteById = (id: SiteId): SiteMeta => SITES.find((s) => s.id === id)!;
@@ -89,16 +90,18 @@ export const TYPES: TypeMeta[] = [
 
 export const typeById = (id: LaborType): TypeMeta => TYPES.find((t) => t.id === id)!;
 
+// Allocation palette matches the deck's Sankey (human-only brown, AI-only gray,
+// human–AI collaboration purple) so every allocation view is consistent.
 export const ALLOCATIONS = [
-  { id: "Human Only" as Allocation, label: "Human-Only", color: "#3b4a6b" },
-  { id: "HA" as Allocation, label: "Human–AI Collaboration", color: "#2f8f7f" },
-  { id: "AI Only" as Allocation, label: "AI-Only", color: "#b8543a" },
+  { id: "Human Only" as Allocation, label: "Human-Only", color: "#8c7346" },
+  { id: "HA" as Allocation, label: "Human–AI Collaboration", color: "#7c6199" },
+  { id: "AI Only" as Allocation, label: "AI-Only", color: "#9a9a9a" },
 ];
 
 export const LAYERS = [
   { n: 1, id: "sites", title: "Labor Sites", rq: "RQ1", question: "Where — and whose work?", def: "Specify where AI assistance is positioned in the film-production hierarchy and whose work it is designed to assist, defined by assistance context (individual vs. group) and production position (ATL vs. BTL)." },
   { n: 2, id: "types", title: "Labor Types", rq: "RQ2", question: "What kind of labor?", def: "Describe the forms of filmmaking labor a system brings into scope during use: executional, structural, meaning-making, and relational labor." },
-  { n: 3, id: "allocation", title: "Human–AI Labor Allocation", rq: "RQ3", question: "Who leads it?", def: "Characterize how each involved labor type is allocated between the user and the system during use — captured as human-only, AI-only, or human–AI collaboration." },
+  { n: 3, id: "allocation", title: "Human–AI Labor Allocation", rq: "RQ3", question: "How is it allocated?", def: "Characterize how each involved labor type is allocated between human creators and AI systems during use — captured as human-only, AI-only, or human–AI collaboration." },
 ];
 
 // Derived aggregates -------------------------------------------------------

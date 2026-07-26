@@ -6,12 +6,12 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-6 pt-24 pb-16"
+      className="relative flex min-h-[100svh] flex-col overflow-hidden px-6 pt-24 pb-8"
     >
-      <div className="mx-auto w-full max-w-[var(--maxw)]">
-        <div className="grid items-center gap-12 lg:grid-cols-12">
+      <div className="mx-auto flex w-full max-w-[var(--maxw)] flex-1 items-center">
+        <div className="grid w-full items-center gap-10 lg:grid-cols-12 lg:gap-10">
           {/* left: editorial copy */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-6">
             <span className="label flex items-center gap-2.5">
               <span
                 className="inline-block h-2 w-2 rounded-full"
@@ -28,7 +28,7 @@ export default function Hero() {
               A survey of labor sites, labor types, and human–AI labor allocation.
             </p>
 
-            <p className="mt-8 max-w-xl text-pretty text-[1.06rem] leading-relaxed text-[var(--muted)]">
+            <p className="mt-7 max-w-xl text-pretty text-[1.06rem] leading-relaxed text-[var(--muted)]">
               The survey reads {CORPUS.total} AI-assisted filmmaking systems
               through three questions:{" "}
               <em className="font-display italic text-[var(--ink)]">where</em> AI
@@ -41,7 +41,7 @@ export default function Hero() {
             </p>
 
             {/* metadata row */}
-            <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2">
+            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2">
               <Meta k="Presenter" v="Yuying Tang" />
               <Dot />
               <Meta k="Supervisors" v="Prof. Huamin Qu · Prof. Xiaojuan Ma" />
@@ -50,9 +50,11 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* right: bespoke line-art motif */}
-          <div className="lg:col-span-5">
-            <LensMotif />
+          {/* right: bespoke line-art motif (enlarged) */}
+          <div className="lg:col-span-6">
+            <div className="mx-auto w-full max-w-md lg:max-w-none">
+              <LensMotif />
+            </div>
           </div>
         </div>
       </div>
@@ -61,7 +63,7 @@ export default function Hero() {
         onClick={() =>
           document.getElementById("framework")?.scrollIntoView({ behavior: "smooth" })
         }
-        className="absolute inset-x-0 bottom-7 mx-auto flex w-max flex-col items-center gap-2 text-[var(--faint)] transition-colors hover:text-[var(--ink)]"
+        className="mx-auto mt-6 flex w-max shrink-0 flex-col items-center gap-2 text-[var(--faint)] transition-colors hover:text-[var(--ink)]"
         style={{ animation: "floatY 2.6s ease-in-out infinite" }}
         aria-label="Scroll to begin"
       >
@@ -87,62 +89,93 @@ function Dot() {
   return <span className="hidden h-8 w-px bg-[var(--hairline)] sm:block" />;
 }
 
-/** Film frame dissolving into a labor-node graph. */
+/** The three-layer taxonomy as an abstract flow: Sites → Types → Allocation. */
 function LensMotif() {
-  const nodes = [
-    { x: 372, y: 46, c: "var(--exec)" },
-    { x: 430, y: 92, c: "var(--struct)" },
-    { x: 356, y: 116, c: "var(--meaning)" },
-    { x: 418, y: 150, c: "var(--relational)" },
+  const cols = [
+    {
+      x: 46,
+      label: "Where",
+      sub: "Sites",
+      nodes: [
+        { y: 34, c: "var(--atl-ind)" },
+        { y: 74, c: "var(--atl-grp)" },
+        { y: 114, c: "var(--btl-ind)" },
+        { y: 154, c: "var(--btl-grp)" },
+        { y: 194, c: "var(--cross)" },
+      ],
+    },
+    {
+      x: 225,
+      label: "What",
+      sub: "Types",
+      nodes: [
+        { y: 54, c: "var(--exec)" },
+        { y: 94, c: "var(--struct)" },
+        { y: 134, c: "var(--meaning)" },
+        { y: 174, c: "var(--relational)" },
+      ],
+    },
+    {
+      x: 404,
+      label: "How",
+      sub: "Allocation",
+      nodes: [
+        { y: 74, c: "#8c7346" },
+        { y: 114, c: "#7c6199" },
+        { y: 154, c: "#9a9a9a" },
+      ],
+    },
   ];
-  const src = { x: 250, y: 100 };
+
+  const links: [number, number, number, number][] = [];
+  // connect each node in a column to two nearest nodes in the next column
+  for (let ci = 0; ci < cols.length - 1; ci++) {
+    const a = cols[ci];
+    const b = cols[ci + 1];
+    a.nodes.forEach((na) => {
+      const nearest = [...b.nodes]
+        .sort((p, q) => Math.abs(p.y - na.y) - Math.abs(q.y - na.y))
+        .slice(0, 2);
+      nearest.forEach((nb) => links.push([a.x, na.y, b.x, nb.y]));
+    });
+  }
+
   return (
-    <div className="relative" style={{ animation: "floatY 6s ease-in-out infinite" }}>
-      <svg viewBox="0 0 470 200" className="w-full" fill="none">
-        <g stroke="var(--border-strong)" strokeWidth="1.4">
-          <rect x="24" y="40" width="150" height="120" rx="8" />
-          {[70, 100, 130].map((y, i) => (
-            <line key={i} x1="24" y1={y} x2="174" y2={y} strokeOpacity="0.5" />
-          ))}
+    <div className="relative" style={{ animation: "floatY 7s ease-in-out infinite" }}>
+      <svg viewBox="0 0 450 240" className="w-full" fill="none">
+        {/* connectors */}
+        <g stroke="var(--ink)" strokeOpacity="0.16" strokeWidth="1">
+          {links.map(([x1, y1, x2, y2], i) => {
+            const mx = (x1 + x2) / 2;
+            return (
+              <path
+                key={i}
+                d={`M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`}
+                strokeDasharray="260"
+                strokeDashoffset="260"
+                style={{ animation: `dash 1.6s ease-out ${0.2 + i * 0.03}s forwards` }}
+              />
+            );
+          })}
         </g>
-        <g fill="var(--border-strong)">
-          {[40, 66, 92, 118, 144].map((y) => (
-            <rect key={`l${y}`} x="30" y={y} width="6" height="9" rx="1.5" />
-          ))}
-          {[40, 66, 92, 118, 144].map((y) => (
-            <rect key={`r${y}`} x="162" y={y} width="6" height="9" rx="1.5" />
-          ))}
-        </g>
-        <g stroke="var(--ink)" strokeOpacity="0.28" strokeWidth="1.2">
-          {nodes.map((n, i) => (
-            <path
-              key={i}
-              d={`M${src.x - 76},${src.y} C ${src.x},${src.y} ${n.x - 60},${n.y} ${n.x},${n.y}`}
-              strokeDasharray="240"
-              strokeDashoffset="240"
-              style={{ animation: `dash 1.4s ease-out ${0.3 + i * 0.15}s forwards` }}
-            />
-          ))}
-        </g>
-        <g stroke="var(--ink)" strokeOpacity="0.18" strokeWidth="1">
-          <line x1={nodes[0].x} y1={nodes[0].y} x2={nodes[1].x} y2={nodes[1].y} />
-          <line x1={nodes[1].x} y1={nodes[1].y} x2={nodes[3].x} y2={nodes[3].y} />
-          <line x1={nodes[2].x} y1={nodes[2].y} x2={nodes[1].x} y2={nodes[1].y} />
-          <line x1={nodes[2].x} y1={nodes[2].y} x2={nodes[3].x} y2={nodes[3].y} />
-        </g>
-        {nodes.map((n, i) => (
-          <g key={i}>
-            <circle cx={n.x} cy={n.y} r="9" fill={n.c} fillOpacity="0.16" />
-            <circle cx={n.x} cy={n.y} r="4.5" fill={n.c} />
+        {/* nodes + column labels */}
+        {cols.map((col) => (
+          <g key={col.label}>
+            {col.nodes.map((n, i) => (
+              <g key={i}>
+                <circle cx={col.x} cy={n.y} r="9" fill={n.c} fillOpacity="0.16" />
+                <circle cx={col.x} cy={n.y} r="4.5" fill={n.c} />
+              </g>
+            ))}
+            <text x={col.x} y={222} textAnchor="middle" fontFamily="var(--font-display-stack)" fontStyle="italic" fontSize="15" fill="var(--ink)">
+              {col.label}
+            </text>
+            <text x={col.x} y={236} textAnchor="middle" fontFamily="var(--font-sans-stack)" fontSize="9" letterSpacing="1.4" fill="var(--faint)">
+              {col.sub.toUpperCase()}
+            </text>
           </g>
         ))}
-        <circle cx="99" cy="100" r="15" stroke="var(--atl-ind)" strokeWidth="1.4" strokeOpacity="0.7" />
-        <circle cx="99" cy="100" r="4" fill="var(--atl-ind)" fillOpacity="0.7" />
       </svg>
-      <div className="mt-2 flex justify-between px-2">
-        <span className="label text-[0.58rem]">Film</span>
-        <span className="label text-[0.58rem]">AI labor</span>
-      </div>
     </div>
   );
 }

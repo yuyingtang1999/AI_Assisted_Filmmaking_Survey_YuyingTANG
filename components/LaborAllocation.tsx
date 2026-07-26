@@ -11,7 +11,7 @@ import {
 } from "@/lib/data";
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
-import Figure from "./Figure";
+import AllocationMethod from "./AllocationMethod";
 
 function counts(type: LaborType) {
   const c = { "Human Only": 0, HA: 0, "AI Only": 0 } as Record<Allocation, number>;
@@ -37,25 +37,20 @@ export default function LaborAllocation() {
         accent="var(--meaning)"
         title={
           <>
-            Labor Allocation — <em>who</em> leads?
+            Labor Allocation — <em>how</em> is it allocated?
           </>
         }
       >
         <p className="lede">
-          For every labor type a system touches, the work is split between human
-          and machine as <strong>human-only</strong>, <strong>AI-only</strong>, or{" "}
-          <strong>human–AI collaboration</strong>. Select a labor type to see
-          where control sits.
+          For every labor type a system touches, the work is allocated between
+          human creators and AI systems as <strong>human-only</strong>,{" "}
+          <strong>AI-only</strong>, or <strong>human–AI collaboration</strong>.
+          Select a labor type to see how it splits.
         </p>
       </SectionHeader>
 
       <Reveal className="mt-12">
-        <Figure
-          src="/figures/allocation-steps.jpg"
-          alt="Two-step coding method: identify evidence of human and AI labor, then derive the allocation label."
-          caption="How allocation is coded: first identify evidence of human and AI labor per type, then derive a human-only, AI-only, or collaboration label."
-          ratio={2131 / 631}
-        />
+        <AllocationMethod />
       </Reveal>
 
       <div className="mt-14 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
@@ -135,10 +130,10 @@ export default function LaborAllocation() {
             <div className="mt-6">
               <div className="flex justify-between text-xs font-medium">
                 <span className="flex items-center gap-1.5 text-[var(--fg)]">
-                  <HumanIcon /> Human-led
+                  <HumanIcon /> Human-only
                 </span>
                 <span className="flex items-center gap-1.5 text-[var(--fg)]">
-                  AI-led <AiIcon />
+                  AI-only <AiIcon />
                 </span>
               </div>
               <div className="mt-2 flex h-4 w-full overflow-hidden rounded-full bg-[var(--track)]">
@@ -192,11 +187,11 @@ export default function LaborAllocation() {
             <strong className="text-[var(--fg)]">Finding.</strong> Human–AI
             collaboration concentrates in <em>executional</em> and{" "}
             <em>structural</em> work, where artifacts are concrete and feedback
-            is immediate. <em>Meaning-making</em> and <em>relational</em> labor
-            stay human-led — interpretation, aesthetic judgment, trust and
-            accountability resist delegation. AI-only hand-off clusters in{" "}
-            <em>BTL execution</em>; relational work remains human-only across the
-            board.
+            is immediate. For <em>meaning-making</em>, the human-only share is
+            largest, and <em>relational</em> labor is entirely human-only —
+            interpretation, aesthetic judgment, trust and accountability resist
+            delegation. AI-only hand-off, in turn, clusters in{" "}
+            <em>BTL execution</em>.
           </p>
         </div>
       </Reveal>
