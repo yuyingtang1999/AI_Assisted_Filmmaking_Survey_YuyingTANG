@@ -52,7 +52,7 @@ export default function Hero() {
 
           {/* right: bespoke line-art motif (enlarged) */}
           <div className="lg:col-span-6">
-            <div className="mx-auto w-full max-w-md lg:max-w-none">
+            <div className="mx-auto w-full max-w-[430px]">
               <LensMotif />
             </div>
           </div>
@@ -89,89 +89,91 @@ function Dot() {
   return <span className="hidden h-8 w-px bg-[var(--hairline)] sm:block" />;
 }
 
-/** The three-layer taxonomy as an abstract flow: Sites → Types → Allocation. */
+/** Logo mark: the three-layer taxonomy as light running through a film cell.
+ *  Narrow, tall film frame; one unified color per step; a warm light travels. */
 function LensMotif() {
-  const cols = [
-    {
-      x: 46,
-      label: "Where",
-      sub: "Sites",
-      nodes: [
-        { y: 34, c: "var(--atl-ind)" },
-        { y: 74, c: "var(--atl-grp)" },
-        { y: 114, c: "var(--btl-ind)" },
-        { y: 154, c: "var(--btl-grp)" },
-        { y: 194, c: "var(--cross)" },
-      ],
-    },
-    {
-      x: 225,
-      label: "What",
-      sub: "Types",
-      nodes: [
-        { y: 54, c: "var(--exec)" },
-        { y: 94, c: "var(--struct)" },
-        { y: 134, c: "var(--meaning)" },
-        { y: 174, c: "var(--relational)" },
-      ],
-    },
-    {
-      x: 404,
-      label: "How",
-      sub: "Allocation",
-      nodes: [
-        { y: 74, c: "#8c7346" },
-        { y: 114, c: "#7c6199" },
-        { y: 154, c: "#9a9a9a" },
-      ],
-    },
+  const STEPS = [
+    { x: 116, color: "#d97c5a", label: "Where", sub: "Sites", ys: [70, 122, 174, 226, 278] },
+    { x: 200, color: "#6f9350", label: "What", sub: "Types", ys: [96, 148, 200, 252] },
+    { x: 284, color: "#7c6199", label: "How", sub: "Allocation", ys: [122, 174, 226] },
   ];
 
-  const links: [number, number, number, number][] = [];
-  // connect each node in a column to two nearest nodes in the next column
-  for (let ci = 0; ci < cols.length - 1; ci++) {
-    const a = cols[ci];
-    const b = cols[ci + 1];
-    a.nodes.forEach((na) => {
-      const nearest = [...b.nodes]
-        .sort((p, q) => Math.abs(p.y - na.y) - Math.abs(q.y - na.y))
-        .slice(0, 2);
-      nearest.forEach((nb) => links.push([a.x, na.y, b.x, nb.y]));
+  // faint connectors: each node to its two nearest in the next step
+  const links: { x1: number; y1: number; x2: number; y2: number }[] = [];
+  for (let ci = 0; ci < STEPS.length - 1; ci++) {
+    const a = STEPS[ci], b = STEPS[ci + 1];
+    a.ys.forEach((ay) => {
+      [...b.ys].sort((p, q) => Math.abs(p - ay) - Math.abs(q - ay)).slice(0, 2)
+        .forEach((by) => links.push({ x1: a.x, y1: ay, x2: b.x, y2: by }));
     });
   }
+  const curve = (l: { x1: number; y1: number; x2: number; y2: number }) => {
+    const mx = (l.x1 + l.x2) / 2;
+    return `M${l.x1},${l.y1} C${mx},${l.y1} ${mx},${l.y2} ${l.x2},${l.y2}`;
+  };
+
+  // full-chain paths for the travelling light (Where → What → How)
+  const chain = (si: number, ti: number, ai: number) => {
+    const s = STEPS[0], t = STEPS[1], h = STEPS[2];
+    const m1 = (s.x + t.x) / 2, m2 = (t.x + h.x) / 2;
+    return `M${s.x},${s.ys[si]} C${m1},${s.ys[si]} ${m1},${t.ys[ti]} ${t.x},${t.ys[ti]} C${m2},${t.ys[ti]} ${m2},${h.ys[ai]} ${h.x},${h.ys[ai]}`;
+  };
+  const chains = [
+    { d: chain(2, 1, 1), begin: "0s" },
+    { d: chain(0, 0, 0), begin: "2.4s" },
+    { d: chain(4, 3, 2), begin: "4.8s" },
+  ];
+
+  const perfXs: number[] = [];
+  for (let x = 48; x <= 350; x += 24) perfXs.push(x);
 
   return (
-    <div className="relative" style={{ animation: "floatY 7s ease-in-out infinite" }}>
-      <svg viewBox="0 0 450 240" className="w-full" fill="none">
-        {/* connectors */}
-        <g stroke="var(--ink)" strokeOpacity="0.16" strokeWidth="1">
-          {links.map(([x1, y1, x2, y2], i) => {
-            const mx = (x1 + x2) / 2;
-            return (
-              <path
-                key={i}
-                d={`M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`}
-                strokeDasharray="260"
-                strokeDashoffset="260"
-                style={{ animation: `dash 1.6s ease-out ${0.2 + i * 0.03}s forwards` }}
-              />
-            );
-          })}
+    <div className="relative mx-auto" style={{ animation: "floatY 7s ease-in-out infinite" }}>
+      <svg viewBox="0 0 400 396" className="w-full" fill="none">
+        {/* film cell + sprocket perforations (narrow & tall) */}
+        <rect x="34" y="14" width="332" height="320" rx="16" stroke="var(--border-strong)" strokeWidth="1.5" />
+        <g fill="var(--border-strong)" opacity="0.4">
+          {perfXs.map((x, i) => (
+            <g key={i}>
+              <rect x={x} y={22} width="6" height="9" rx="2" />
+              <rect x={x} y={317} width="6" height="9" rx="2" />
+            </g>
+          ))}
         </g>
-        {/* nodes + column labels */}
-        {cols.map((col) => (
-          <g key={col.label}>
-            {col.nodes.map((n, i) => (
+
+        {/* connectors (draw in on load) */}
+        <g stroke="var(--ink)" strokeOpacity="0.12" strokeWidth="1.1">
+          {links.map((l, i) => (
+            <path key={i} d={curve(l)} strokeDasharray="300" strokeDashoffset="300"
+              style={{ animation: `dash 1.5s ease-out ${0.25 + i * 0.025}s forwards` }} />
+          ))}
+        </g>
+
+        {/* travelling light — subtle warm pulse running the chain */}
+        {chains.map((c, i) => (
+          <circle key={i} r="3.4" fill="#caa24a" opacity="0">
+            <animateMotion dur="7.2s" begin={c.begin} repeatCount="indefinite" path={c.d} />
+            <animate attributeName="opacity" dur="7.2s" begin={c.begin} repeatCount="indefinite"
+              values="0;0.85;0.85;0" keyTimes="0;0.12;0.88;1" />
+            <animate attributeName="r" dur="7.2s" begin={c.begin} repeatCount="indefinite"
+              values="2.6;3.8;2.6" keyTimes="0;0.5;1" />
+          </circle>
+        ))}
+
+        {/* nodes (ring + dot), one color per step — enlarged */}
+        {STEPS.map((step) => (
+          <g key={step.label}>
+            {step.ys.map((y, i) => (
               <g key={i}>
-                <circle cx={col.x} cy={n.y} r="9" fill={n.c} fillOpacity="0.16" />
-                <circle cx={col.x} cy={n.y} r="4.5" fill={n.c} />
+                <circle cx={step.x} cy={y} r="11" fill="none" stroke={step.color} strokeOpacity="0.32" strokeWidth="1.5" />
+                <circle cx={step.x} cy={y} r="6" fill={step.color} />
               </g>
             ))}
-            <text x={col.x} y={222} textAnchor="middle" fontFamily="var(--font-display-stack)" fontStyle="italic" fontSize="15" fill="var(--ink)">
-              {col.label}
+            <text x={step.x} y={362} textAnchor="middle" fontFamily="var(--font-display-stack)" fontStyle="italic" fontSize="18" fill="var(--ink)">
+              {step.label}
             </text>
-            <text x={col.x} y={236} textAnchor="middle" fontFamily="var(--font-sans-stack)" fontSize="9" letterSpacing="1.4" fill="var(--faint)">
-              {col.sub.toUpperCase()}
+            <text x={step.x} y={381} textAnchor="middle" fontFamily="var(--font-sans-stack)" fontSize="9.5" fontWeight="600" letterSpacing="1.5" fill="var(--faint)">
+              {step.sub.toUpperCase()}
             </text>
           </g>
         ))}
