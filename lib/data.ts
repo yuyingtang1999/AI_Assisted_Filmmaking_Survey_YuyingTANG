@@ -61,12 +61,12 @@ export interface SiteMeta {
   pct: string;
 }
 
-// Site palette matches the deck's Sankey (used consistently site-wide).
+// Site palette — orange / purple / green / blue (used consistently site-wide).
 export const SITES: SiteMeta[] = [
-  { id: "atl-ind", label: "ATL · Individual-Level", short: "ATL Individual", atl: true, group: false, accent: "#d97c5a", soft: "#f8e9e1", roles: "Directors, Screenwriters", focus: "Narrative judgment & creative positioning", count: 6, pct: "19.4%" },
-  { id: "atl-grp", label: "ATL · Group-Level", short: "ATL Group", atl: true, group: true, accent: "#6f9350", soft: "#e9f0e1", roles: "Director + Cinematographer", focus: "Shared understanding & high-level convergence", count: 3, pct: "9.7%" },
-  { id: "btl-ind", label: "BTL · Individual-Level", short: "BTL Individual", atl: false, group: false, accent: "#c3a96b", soft: "#f5efe1", roles: "Camera, Sound, VFX", focus: "Operational speed & concrete outputs", count: 18, pct: "58.1%" },
-  { id: "btl-grp", label: "BTL · Group-Level", short: "BTL Group", atl: false, group: true, accent: "#7196ac", soft: "#e8eef3", roles: "Gaffer, Grip, VFX team", focus: "Operational synchronization", count: 2, pct: "6.5%" },
+  { id: "atl-ind", label: "ATL · Individual-Level", short: "ATL Individual", atl: true, group: false, accent: "#df8a41", soft: "#f8ecdf", roles: "Directors, Screenwriters", focus: "Narrative judgment & creative positioning", count: 6, pct: "19.4%" },
+  { id: "atl-grp", label: "ATL · Group-Level", short: "ATL Group", atl: true, group: true, accent: "#8c66ac", soft: "#efe9f4", roles: "Director + Cinematographer", focus: "Shared understanding & high-level convergence", count: 3, pct: "9.7%" },
+  { id: "btl-ind", label: "BTL · Individual-Level", short: "BTL Individual", atl: false, group: false, accent: "#5a9e64", soft: "#e7f1e8", roles: "Camera, Sound, VFX", focus: "Operational speed & concrete outputs", count: 18, pct: "58.1%" },
+  { id: "btl-grp", label: "BTL · Group-Level", short: "BTL Group", atl: false, group: true, accent: "#5f8cbe", soft: "#e7eef7", roles: "Gaffer, Grip, VFX team", focus: "Operational synchronization", count: 2, pct: "6.5%" },
   { id: "cross", label: "Cross-Site", short: "Cross-Site", atl: false, group: true, accent: "#8f8f8f", soft: "#eeeeee", roles: "Spanning ATL & BTL roles", focus: "Assistance spanning multiple labor sites", count: 2, pct: "6.5%" },
 ];
 
@@ -99,7 +99,7 @@ export const ALLOCATIONS = [
 ];
 
 export const LAYERS = [
-  { n: 1, id: "sites", title: "Labor Sites", rq: "RQ1", question: "Where — and whose work?", def: "Specify where AI assistance is positioned in the film-production hierarchy and whose work it is designed to assist, defined by assistance context (individual vs. group) and production position (ATL vs. BTL)." },
+  { n: 1, id: "sites", title: "Labor Sites", rq: "RQ1", question: "Where — and whose labor?", def: "Specify where AI assistance is positioned in the film-production hierarchy and whose work it is designed to assist, defined by assistance context (individual vs. group) and production position (Above-the-line (ATL) vs. Below-the-line (BTL))." },
   { n: 2, id: "types", title: "Labor Types", rq: "RQ2", question: "What kind of labor?", def: "Describe the forms of filmmaking labor a system brings into scope during use: executional, structural, meaning-making, and relational labor." },
   { n: 3, id: "allocation", title: "Human–AI Labor Allocation", rq: "RQ3", question: "How is it allocated?", def: "Characterize how each involved labor type is allocated between human creators and AI systems during use — captured as human-only, AI-only, or human–AI collaboration." },
 ];

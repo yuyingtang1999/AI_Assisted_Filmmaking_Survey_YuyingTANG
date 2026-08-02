@@ -10,19 +10,21 @@ import {
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
 
-/* compact line-icons per quadrant (ink glyphs) */
+/* custom line-icons per quadrant — original glyphs, not from the deck.
+   ATL-Ind: director's chair · ATL-Grp: creative pair · BTL-Ind: movie camera ·
+   BTL-Grp: equipment / crew (interlocking gears). */
 function RoleIcons({ id }: { id: SiteId }) {
   const s = { stroke: "currentColor", strokeWidth: 1.5, fill: "none", strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
   const wrap = (children: React.ReactNode) => (
-    <svg width="22" height="22" viewBox="0 0 24 24" {...s}>{children}</svg>
+    <svg width="26" height="26" viewBox="0 0 24 24" {...s}>{children}</svg>
   );
-  if (id === "atl-ind")
-    return wrap(<><circle cx="8" cy="7" r="2.4" /><path d="M4 19c0-2.5 1.8-4.2 4-4.2" /><path d="M15 5l4 1.5-1.4 3.8" /><path d="M14 20l3-9" /></>);
-  if (id === "atl-grp")
-    return wrap(<><circle cx="12" cy="6" r="2" /><circle cx="6" cy="15" r="2" /><circle cx="18" cy="15" r="2" /><path d="M12 8v3M10.5 13l-3 1M13.5 13l3 1" /></>);
-  if (id === "btl-ind")
-    return wrap(<><rect x="3" y="5" width="12" height="9" rx="1.5" /><path d="M6 18h6M9 14v4" /><path d="M18 9v6M21 11v2" /></>);
-  return wrap(<><circle cx="8" cy="8" r="2.6" /><path d="M8 5.4V4M8 12.6V14M11 8h1.4M4 8H2.6M10 6l1-1M5 11l-1 1M10 10l1 1M5 5 4 4" /><rect x="14" y="12" width="7" height="7" rx="1" /></>);
+  if (id === "atl-ind") // director's chair
+    return wrap(<><path d="M7 5v10M17 5v10" /><path d="M7 6.5h10" /><path d="M6 10.5h12" /><path d="M6 20l6-5 6 5" /><path d="M12 15v5" /></>);
+  if (id === "atl-grp") // creative pair (two people)
+    return wrap(<><circle cx="8.5" cy="8" r="2.3" /><path d="M4.5 18c0-2.3 1.8-3.8 4-3.8" /><circle cx="16" cy="9" r="2" /><path d="M12.5 18c0-2 1.4-3.4 3.5-3.4s3.5 1.4 3.5 3.4" /></>);
+  if (id === "btl-ind") // movie camera
+    return wrap(<><rect x="2.5" y="9" width="12" height="9" rx="1.5" /><circle cx="6" cy="6.5" r="2.1" /><circle cx="11" cy="6.5" r="2.1" /><path d="M14.5 12l5.5-2.2v7.4L14.5 15z" /></>);
+  return wrap(<><circle cx="8.5" cy="8.5" r="3" /><path d="M8.5 4.5V3M8.5 14V12.5M12.5 8.5H14M3 8.5H4.5M11.4 5.6l1-1M4.6 12.4l1-1M11.4 11.4l1 1M4.6 4.6l1 1" /><circle cx="16.5" cy="16.5" r="2.4" /><path d="M16.5 13.5v-1M16.5 20.5v-1M19.5 16.5h1M12.5 16.5h1" /></>);
 }
 
 export default function LaborSites() {
@@ -81,14 +83,15 @@ export default function LaborSites() {
         accent="var(--atl-ind)"
         title={
           <>
-            Labor Sites — <em>where</em>, and whose?
+            Labor Sites — <em>Where</em> and Whose?
           </>
         }
       >
         <p className="lede">
           Every system sits somewhere in the production hierarchy. Two axes
-          define the site: <strong className="font-semibold text-[var(--fg)]">ATL vs. BTL</strong>{" "}
-          (above- vs. below-the-line creative position) and{" "}
+          define the site:{" "}
+          <strong className="font-semibold text-[var(--fg)]">Above-the-line (ATL) vs. Below-the-line (BTL)</strong>{" "}
+          (creative position) and{" "}
           <strong className="font-semibold text-[var(--fg)]">Individual vs. Group</strong>{" "}
           (who is being assisted). Hover a quadrant to inspect it.
         </p>
@@ -105,7 +108,7 @@ export default function LaborSites() {
               </span>
             </div>
 
-            <div className="grid flex-1 grid-cols-[1.4rem_1fr] gap-x-3 gap-y-3">
+            <div className="grid flex-1 grid-cols-[1.5rem_1fr] gap-x-3 gap-y-3">
               {/* top axis labels */}
               <div />
               <div className="grid grid-cols-2">
@@ -115,7 +118,9 @@ export default function LaborSites() {
 
               {/* ATL row */}
               <div className="flex items-center justify-center">
-                <span className="font-mono text-xs font-semibold text-[var(--muted)]">ATL</span>
+                <span className="label whitespace-nowrap [writing-mode:vertical-rl] [transform:rotate(180deg)]">
+                  Above-the-line (ATL)
+                </span>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 {renderCell("atl-ind")}
@@ -124,7 +129,9 @@ export default function LaborSites() {
 
               {/* BTL row */}
               <div className="flex items-center justify-center">
-                <span className="font-mono text-xs font-semibold text-[var(--muted)]">BTL</span>
+                <span className="label whitespace-nowrap [writing-mode:vertical-rl] [transform:rotate(180deg)]">
+                  Below-the-line (BTL)
+                </span>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 {renderCell("btl-ind")}
@@ -240,17 +247,20 @@ export default function LaborSites() {
       </div>
 
       <Reveal delay={80}>
-        <p className="mt-12 max-w-3xl text-sm leading-relaxed text-[var(--muted)]">
-          <strong className="font-semibold text-[var(--fg)]">Why this distribution?</strong>{" "}
-          Early work concentrated in BTL individual-level assistance because it
-          targeted bounded, execution-oriented tasks — camera control, editing,
-          animation, and asset manipulation — that are easy to isolate, build,
-          and evaluate in single-user settings. ATL, group-level, and cross-site
-          assistance emerged later because they involve harder-to-formalize
-          labor: creative direction, coordination, and intent alignment across
-          roles. This post-2022 diversification tracks the rise of generative
-          AI, which should be seen as an <em className="font-display italic">accelerator</em>.
-        </p>
+        <div className="mt-8 rounded-xl border border-[var(--border)] bg-[var(--panel)] p-6">
+          <p className="text-sm leading-relaxed text-[var(--muted)]">
+            <strong className="font-semibold text-[var(--fg)]">Why this distribution?</strong>{" "}
+            Early work concentrated in BTL individual-level assistance because it
+            targeted bounded, execution-oriented tasks — camera control, editing,
+            animation, and asset manipulation — that are easy to isolate, build,
+            and evaluate in single-user settings. ATL, group-level, and
+            cross-site assistance emerged later because they involve
+            harder-to-formalize labor: creative direction, coordination, and
+            intent alignment across roles. This post-2022 diversification tracks
+            the rise of generative AI, which should be seen as an{" "}
+            <em className="font-display italic">accelerator</em>.
+          </p>
+        </div>
       </Reveal>
     </section>
   );

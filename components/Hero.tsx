@@ -31,22 +31,24 @@ export default function Hero() {
             <p className="mt-7 max-w-xl text-pretty text-[1.06rem] leading-relaxed text-[var(--muted)]">
               The survey reads {CORPUS.total} AI-assisted filmmaking systems
               through three questions:{" "}
-              <em className="font-display italic text-[var(--ink)]">where</em> AI
-              assistance is positioned in the film-production hierarchy and whose
-              work it assists;{" "}
-              <em className="font-display italic text-[var(--ink)]">what</em>{" "}
-              forms of labor it brings into scope; and{" "}
-              <em className="font-display italic text-[var(--ink)]">how</em> each
-              labor type is allocated between the user and the system.
+              <em className="font-display italic text-[var(--ink)]">Where</em> is
+              AI assistance positioned, and whose labor does it assist?{" "}
+              <em className="font-display italic text-[var(--ink)]">What</em>{" "}
+              kinds of filmmaking labor are involved during system use?{" "}
+              <em className="font-display italic text-[var(--ink)]">How</em> are
+              these labor types allocated between human creators and AI systems?
             </p>
 
-            {/* metadata row */}
-            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2">
-              <Meta k="Presenter" v="Yuying Tang" />
-              <Dot />
-              <Meta k="Supervisors" v="Prof. Huamin Qu · Prof. Xiaojuan Ma" />
-              <Dot />
-              <Meta k="Corpus" v={`${CORPUS.total} systems · through 2025`} />
+            {/* authors + corpus */}
+            <div className="mt-8">
+              <p className="label text-[0.6rem]">Authors</p>
+              <p className="mt-1 max-w-xl text-sm font-medium leading-relaxed text-[var(--fg)]">
+                Yuying Tang, Lin Gao, Haotian Li, Ziwei Wu, Baiqiao Zhang,
+                Rebecca Fiebrink, Sebastian Deterding, Xiaojuan Ma, and Huamin Qu
+              </p>
+              <p className="mt-3 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-[var(--faint)]">
+                {CORPUS.total} systems · through 2025
+              </p>
             </div>
           </div>
 
@@ -77,34 +79,21 @@ export default function Hero() {
   );
 }
 
-function Meta({ k, v }: { k: string; v: string }) {
-  return (
-    <span className="flex flex-col">
-      <span className="label text-[0.6rem]">{k}</span>
-      <span className="mt-0.5 text-sm font-medium text-[var(--fg)]">{v}</span>
-    </span>
-  );
-}
-function Dot() {
-  return <span className="hidden h-8 w-px bg-[var(--hairline)] sm:block" />;
-}
-
 /** Logo mark: the three-layer taxonomy as light running through a film cell.
  *  Narrow, tall film frame; one unified color per step; a warm light travels. */
 function LensMotif() {
   const STEPS = [
-    { x: 116, color: "#d97c5a", label: "Where", sub: "Sites", ys: [70, 122, 174, 226, 278] },
-    { x: 200, color: "#6f9350", label: "What", sub: "Types", ys: [96, 148, 200, 252] },
-    { x: 284, color: "#7c6199", label: "How", sub: "Allocation", ys: [122, 174, 226] },
+    { x: 116, color: "#df8a41", label: "Where", sub: "Sites", ys: [70, 122, 174, 226, 278] },
+    { x: 200, color: "#5a9e64", label: "What", sub: "Types", ys: [96, 148, 200, 252] },
+    { x: 284, color: "#8c66ac", label: "How", sub: "Allocation", ys: [122, 174, 226] },
   ];
 
-  // faint connectors: each node to its two nearest in the next step
+  // connectors: every node linked to every node in the next step
   const links: { x1: number; y1: number; x2: number; y2: number }[] = [];
   for (let ci = 0; ci < STEPS.length - 1; ci++) {
     const a = STEPS[ci], b = STEPS[ci + 1];
     a.ys.forEach((ay) => {
-      [...b.ys].sort((p, q) => Math.abs(p - ay) - Math.abs(q - ay)).slice(0, 2)
-        .forEach((by) => links.push({ x1: a.x, y1: ay, x2: b.x, y2: by }));
+      b.ys.forEach((by) => links.push({ x1: a.x, y1: ay, x2: b.x, y2: by }));
     });
   }
   const curve = (l: { x1: number; y1: number; x2: number; y2: number }) => {
@@ -141,11 +130,11 @@ function LensMotif() {
           ))}
         </g>
 
-        {/* connectors (draw in on load) */}
-        <g stroke="var(--ink)" strokeOpacity="0.12" strokeWidth="1.1">
+        {/* connectors — every node to every node in the next step */}
+        <g stroke="var(--ink)" strokeOpacity="0.09" strokeWidth="1">
           {links.map((l, i) => (
             <path key={i} d={curve(l)} strokeDasharray="300" strokeDashoffset="300"
-              style={{ animation: `dash 1.5s ease-out ${0.25 + i * 0.025}s forwards` }} />
+              style={{ animation: `dash 1.5s ease-out ${0.25 + i * 0.02}s forwards` }} />
           ))}
         </g>
 

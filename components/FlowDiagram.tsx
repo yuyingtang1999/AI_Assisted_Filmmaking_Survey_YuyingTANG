@@ -19,10 +19,10 @@ const COL = { site: ML, type: W / 2 - NODE_W / 2, alloc: W - MR - NODE_W };
 
 /* ---- slide-matched palette ---- */
 const SITE_C: Record<string, string> = {
-  "atl-ind": "#d97c5a",
-  "btl-ind": "#c3a96b",
-  "atl-grp": "#6f9350",
-  "btl-grp": "#7196ac",
+  "atl-ind": "#df8a41",
+  "btl-ind": "#5a9e64",
+  "atl-grp": "#8c66ac",
+  "btl-grp": "#5f8cbe",
 };
 const CROSS_C = "#8f8f8f";
 const TYPE_C = "#b3b3b3";
@@ -239,15 +239,18 @@ export default function FlowDiagram() {
       </Reveal>
 
       <Reveal delay={80}>
-        <p className="prose-measure mx-auto mt-8 text-center text-sm leading-relaxed text-[var(--faint)]">
-          The dominant channel runs{" "}
-          <strong style={{ color: SITE_C["btl-ind"] }}>BTL Individual</strong> →{" "}
-          <strong className="text-[var(--fg)]">Executional</strong> →{" "}
-          <strong style={{ color: ALLOC_C.HA }}>Human-AI Collaboration</strong>.
-          Relational labor appears only from group sites and remains entirely
-          human-only. The two cross-site systems are set aside from the
-          decomposition.
-        </p>
+        <div className="mt-8 rounded-xl border border-[var(--border)] bg-[var(--panel)] p-6">
+          <p className="text-sm leading-relaxed text-[var(--muted)]">
+            <strong className="text-[var(--fg)]">The dominant channel.</strong>{" "}
+            Flow runs{" "}
+            <strong style={{ color: SITE_C["btl-ind"] }}>BTL Individual</strong> →{" "}
+            <strong className="text-[var(--fg)]">Executional</strong> →{" "}
+            <strong style={{ color: ALLOC_C.HA }}>Human-AI Collaboration</strong>.
+            Relational labor appears only from group sites and remains entirely
+            human-only. The two cross-site systems are set aside from the
+            decomposition.
+          </p>
+        </div>
       </Reveal>
     </section>
   );

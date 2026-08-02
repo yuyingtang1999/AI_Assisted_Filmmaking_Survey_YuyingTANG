@@ -6,7 +6,7 @@ const LINKS = [
   { id: "framework", label: "Framework" },
   { id: "sites", label: "Labor Sites" },
   { id: "types", label: "Labor Types" },
-  { id: "allocation", label: "Allocation" },
+  { id: "allocation", label: "Labor Allocation" },
   { id: "synthesis", label: "Synthesis" },
   { id: "archive", label: "Archive" },
   { id: "conclusion", label: "Conclusion" },

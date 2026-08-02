@@ -37,7 +37,7 @@ export default function LaborAllocation() {
         accent="var(--meaning)"
         title={
           <>
-            Labor Allocation — <em>how</em> is it allocated?
+            Labor Allocation — <em>How?</em>
           </>
         }
       >

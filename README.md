@@ -66,18 +66,47 @@ Because dependencies are declared in `package.json` and paths are relative, this
 | `npm run start` | Serve the production build (run `build` first)      |
 | `npm run lint`  | Run ESLint                                          |
 
-## Deploy to Vercel
+## Deploy to GitHub Pages
 
-1. Push this folder to a Git repository (GitHub, GitLab, or Bitbucket).
-2. Go to [vercel.com/new](https://vercel.com/new) and import the repository.
-3. Vercel auto-detects Next.js — no configuration needed. Click **Deploy**.
+This project is configured for a **static export** (`output: "export"` in
+`next.config.mjs`), so `npm run build` writes a complete static site — including
+`index.html` — to the `out/` folder. No server is required.
 
-Alternatively, with the [Vercel CLI](https://vercel.com/docs/cli):
+### Option A — automatic (recommended)
+
+A GitHub Actions workflow is included at `.github/workflows/deploy.yml`.
+
+1. Push this project to a GitHub repository (default branch `main`).
+2. In the repo, go to **Settings → Pages → Build and deployment → Source** and
+   choose **GitHub Actions**.
+3. Every push to `main` builds the site and publishes it. Your page will be at
+   `https://<your-username>.github.io/<repo-name>/`.
+
+The workflow's *Setup Pages* step automatically sets the correct base path for a
+project page, so all assets resolve.
+
+### Option B — build locally and publish the `out/` folder
 
 ```bash
-npm i -g vercel
-vercel
+npm ci
+npm run build          # generates ./out/index.html + assets
 ```
+
+Then serve `out/` however you like — e.g. push its contents to a `gh-pages`
+branch, or drag it into any static host (Netlify, Cloudflare Pages, S3).
+A `.nojekyll` file is included so GitHub Pages serves the `_next/` assets.
+
+To preview the exported site locally:
+
+```bash
+npx serve out
+```
+
+## Deploy to Vercel (alternative)
+
+1. Push this folder to a Git repository.
+2. Import it at [vercel.com/new](https://vercel.com/new) — Next.js is
+   auto-detected. (Static export also works on Vercel unchanged.)
 
 ## Project structure
 

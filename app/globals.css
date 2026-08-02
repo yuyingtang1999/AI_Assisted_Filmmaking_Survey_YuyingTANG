@@ -36,11 +36,11 @@
   --on-accent: #f7f5ef;
 
   /* Labor Sites — PDF originals (data only) */
-  /* Labor Sites — match the deck's Sankey palette (used site-wide) */
-  --atl-ind: #d97c5a;
-  --atl-grp: #6f9350;
-  --btl-ind: #c3a96b;
-  --btl-grp: #7196ac;
+  /* Labor Sites — orange / purple / green / blue (used site-wide) */
+  --atl-ind: #df8a41;
+  --atl-grp: #8c66ac;
+  --btl-ind: #5a9e64;
+  --btl-grp: #5f8cbe;
   --cross: #8f8f8f;
   /* Labor Types — PDF originals (data only) */
   --exec: #c75b39;

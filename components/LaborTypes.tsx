@@ -26,8 +26,6 @@ export default function LaborTypes() {
   const insight =
     year <= 2021
       ? "In 2021 the field is almost purely executional — AI accelerates concrete, bounded output."
-      : year <= 2023
-      ? "By 2023 a stable executional core is joined by early structural support as systems begin to sequence and constrain."
       : "By 2025 structural and meaning-making support have expanded markedly with GenAI — yet relational labor stays scarce.";
 
   return (
@@ -38,14 +36,14 @@ export default function LaborTypes() {
         accent="var(--struct)"
         title={
           <>
-            Labor Types — <em>what</em> work?
+            Labor Types — <em>What?</em>
           </>
         }
       >
         <p className="lede">
-          Four forms of filmmaking labor a system can bring into scope. Drag the
-          timeline to watch AI&apos;s reach spread outward from a stable
-          executional core.
+          Four forms of filmmaking labor are involved in system use. Drag the
+          timeline to watch AI&apos;s reach spread outward from executional
+          labor.
         </p>
       </SectionHeader>
 
@@ -153,12 +151,14 @@ export default function LaborTypes() {
       </Reveal>
 
       <Reveal delay={80}>
-        <p className="mx-auto mt-10 max-w-3xl text-center text-sm leading-relaxed text-[var(--faint)]">
-          <strong className="text-[var(--muted)]">The through-line:</strong>{" "}
-          coverage broadened from a stable executional core toward greater
-          structural and meaning-making support, while relational labor —
-          coordination and trust across people — remained limited throughout.
-        </p>
+        <div className="mt-10 rounded-xl border border-[var(--border)] bg-[var(--panel)] p-6">
+          <p className="text-sm leading-relaxed text-[var(--muted)]">
+            <strong className="text-[var(--fg)]">The through-line.</strong>{" "}
+            Coverage broadened from a stable executional core toward greater
+            structural and meaning-making support, while relational labor —
+            coordination and trust across people — remained limited throughout.
+          </p>
+        </div>
       </Reveal>
     </section>
   );

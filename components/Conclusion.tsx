@@ -1,5 +1,6 @@
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
+import DownloadCorpus from "./DownloadCorpus";
 
 const TAKEAWAYS = [
   {
@@ -70,7 +71,7 @@ export default function Conclusion() {
       </div>
 
       <Reveal delay={60}>
-        <p className="prose-measure mt-10 text-sm leading-relaxed text-[var(--faint)]">
+        <p className="mx-auto mt-10 max-w-4xl text-center text-sm leading-relaxed text-[var(--faint)]">
           Across these shifts, generative AI is best understood as an{" "}
           <em className="font-display italic">accelerator</em> — extending AI
           support from narrow execution toward ideation and higher-level creative
@@ -88,23 +89,7 @@ export default function Conclusion() {
               allocation, with source links.
             </p>
           </div>
-          <a
-            href="/ai-filmmaking-corpus.csv"
-            download
-            className="inline-flex shrink-0 items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-[var(--on-accent)] transition-transform hover:scale-[1.02]"
-            style={{ background: "var(--ink)" }}
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path
-                d="M8 2v8m0 0L5 7m3 3l3-3M3 13h10"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            Download the corpus (CSV)
-          </a>
+          <DownloadCorpus />
         </div>
       </Reveal>
     </section>
