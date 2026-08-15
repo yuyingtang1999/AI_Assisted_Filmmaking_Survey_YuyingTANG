@@ -8,7 +8,7 @@ const TAKEAWAYS = [
     label: "On labor sites",
     title: "Assistance stays concentrated in below-the-line, individual craft.",
     body: "58.1% of systems target BTL individual-level work; ATL, group-level, and cross-site assistance remain comparatively rare, with only two systems spanning multiple labor sites.",
-    color: "var(--btl-ind)",
+    color: "var(--atl-ind)",
   },
   {
     n: "02",

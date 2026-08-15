@@ -37,7 +37,7 @@ export const PAPERS: Paper[] = [
   { id: 24, name: "KinemaFX", venue: "UIST", year: 2025, url: "https://dl.acm.org/doi/10.1145/3746059.3747734", site: "btl-ind", laborTypes: ["Executional", "Structural", "Meaning-Making"], human: ["Executional", "Structural", "Meaning-Making"], ai: ["Executional", "Structural", "Meaning-Making"], allocation: { "Executional": "HA", "Structural": "HA", "Meaning-Making": "HA" } },
   { id: 25, name: "wr-AI-ter", venue: "IMX", year: 2024, url: "https://dl.acm.org/doi/10.1145/3639701.3656325", site: "atl-grp", laborTypes: ["Executional", "Structural", "Meaning-Making"], human: ["Executional", "Structural", "Meaning-Making"], ai: ["Executional", "Structural", "Meaning-Making"], allocation: { "Executional": "HA", "Structural": "HA", "Meaning-Making": "HA" } },
   { id: 26, name: "CollageVis", venue: "CHI", year: 2024, url: "https://dl.acm.org/doi/10.1145/3613904.3642575", site: "atl-grp", laborTypes: ["Executional", "Structural", "Meaning-Making", "Relational"], human: ["Executional", "Structural", "Meaning-Making", "Relational"], ai: ["Executional"], allocation: { "Executional": "HA", "Structural": "Human Only", "Meaning-Making": "Human Only", "Relational": "Human Only" }, desc: "Video-collage-based previsualization that lets indie filmmakers rapidly prototype and communicate film scenes for early idea exploration and production planning.", benefit: "Positions AI-assisted previs as team-facing coordination: faster shared understanding and easier alignment on layout and shots.", challenge: "Cannot replace 3D previs due to limited ability to simulate lighting, which can weaken cross-role decision confidence.", tag: "Relational labor · example" },
-  { id: 27, name: "CineVision", venue: "UIST", year: 2025, url: "https://dl.acm.org/doi/10.1145/3746059.3747793", site: "atl-grp", laborTypes: ["Executional", "Meaning-Making", "Relational"], human: ["Executional", "Meaning-Making", "Relational"], ai: ["Executional", "Structural", "Meaning-Making"], allocation: { "Executional": "HA", "Meaning-Making": "HA", "Relational": "Human Only" }, desc: "Interactive pre-visualization storyboard system that acts as a shared, editable boundary object for Director\u2013Cinematographer collaboration.", benefit: "Real-time visual controls reduce back-and-forth between director and cinematographer.", challenge: "Narrow scope: supports the director-cinematographer dyad only.", tag: "ATL group-level · example" },
+  { id: 27, name: "CineVision", venue: "UIST", year: 2025, url: "https://dl.acm.org/doi/10.1145/3746059.3747793", site: "atl-grp", laborTypes: ["Executional", "Structural", "Meaning-Making", "Relational"], human: ["Executional", "Meaning-Making", "Relational"], ai: ["Executional", "Structural", "Meaning-Making"], allocation: { "Executional": "HA", "Structural": "AI Only", "Meaning-Making": "HA", "Relational": "Human Only" }, desc: "Interactive pre-visualization storyboard system that acts as a shared, editable boundary object for Director\u2013Cinematographer collaboration.", benefit: "Real-time visual controls reduce back-and-forth between director and cinematographer.", challenge: "Narrow scope: supports the director-cinematographer dyad only.", tag: "ATL group-level · example" },
   { id: 28, name: "AniCraft", venue: "UIST", year: 2024, url: "https://dl.acm.org/doi/10.1145/3654777.3676325", site: "btl-grp", laborTypes: ["Executional", "Structural", "Meaning-Making", "Relational"], human: ["Executional", "Structural", "Meaning-Making", "Relational"], ai: ["Executional", "Structural"], allocation: { "Executional": "HA", "Structural": "HA", "Meaning-Making": "Human Only", "Relational": "Human Only" }, desc: "Uses marker-tracked everyday objects in mixed reality to let production crafts and teams rapidly prototype and share 3D character animations for previs.", benefit: "Affordable tracking with everyday materials; faster, lower-skill previs for the whole team.", challenge: "Collaboration is framed in the walkthrough but not directly evaluated.", tag: "Labor-allocation · worked example" },
   { id: 29, name: "EditIQ", venue: "IUI", year: 2025, url: "https://dl.acm.org/doi/10.1145/3708359.3712113", site: "btl-grp", laborTypes: ["Executional", "Structural", "Meaning-Making"], human: [], ai: ["Executional", "Structural", "Meaning-Making"], allocation: { "Executional": "AI Only", "Structural": "AI Only", "Meaning-Making": "AI Only" } },
   { id: 30, name: "Paratrouper", venue: "CHI", year: 2025, url: "https://dl.acm.org/doi/10.1145/3706598.3714242", site: "cross", laborTypes: ["Executional", "Structural", "Meaning-Making"], human: ["Executional", "Structural", "Meaning-Making"], ai: ["Executional", "Structural"], allocation: { "Executional": "HA", "Structural": "HA", "Meaning-Making": "Human Only" }, desc: "Exploratory creation of character-cast visuals using generative AI, spanning ATL-individual, BTL-individual, and BTL-group sites via early reference artifacts.", benefit: "Supports cross-role alignment and coherent cast design through parallel multi-character exploration.", challenge: "Better suited to early exploration than precise downstream production, due to limited fine-grained control.", tag: "Latest, cross-site work" },
@@ -90,11 +90,13 @@ export const TYPES: TypeMeta[] = [
 
 export const typeById = (id: LaborType): TypeMeta => TYPES.find((t) => t.id === id)!;
 
-// Allocation palette matches the deck's Sankey (human-only brown, AI-only gray,
-// human–AI collaboration purple) so every allocation view is consistent.
+// Allocation palette: human-only brown, AI-only gray, and human–AI collaboration
+// in teal. Collaboration was previously purple, which clashed with the ATL-Group
+// site (also purple) in the Sankey; teal keeps the two clearly distinct while
+// staying in the cool family that themes RQ3. Used consistently in every view.
 export const ALLOCATIONS = [
   { id: "Human Only" as Allocation, label: "Human-Only", color: "#8c7346" },
-  { id: "HA" as Allocation, label: "Human–AI Collaboration", color: "#7c6199" },
+  { id: "HA" as Allocation, label: "Human–AI Collaboration", color: "#3a9499" },
   { id: "AI Only" as Allocation, label: "AI-Only", color: "#9a9a9a" },
 ];
 
@@ -115,6 +117,22 @@ export function allocationCounts(type: LaborType) {
   const c = { "Human Only": 0, HA: 0, "AI Only": 0 } as Record<Allocation, number>;
   PAPERS.forEach((p) => { const a = p.allocation[type]; if (a) c[a] += 1; });
   return c;
+}
+
+// Per-year allocation split for one labor type — for each year, the systems
+// introduced that year that bring the type into scope, split by human-only /
+// human–AI / AI-only. Powers the RQ3 temporal small-multiples.
+export function allocationByTypeYear(type: LaborType) {
+  return YEARS.map((y) => {
+    const c = { "Human Only": 0, HA: 0, "AI Only": 0 } as Record<Allocation, number>;
+    PAPERS.forEach((p) => {
+      if (p.year === y && p.laborTypes.includes(type)) {
+        const a = p.allocation[type];
+        if (a) c[a] += 1;
+      }
+    });
+    return { year: y, counts: c, total: c["Human Only"] + c.HA + c["AI Only"] };
+  });
 }
 
 // Sites -> Types flow (paper counts) for the synthesis diagram

@@ -29,7 +29,7 @@ const TYPE_C = "#b3b3b3";
 const ALLOC_C: Record<Allocation, string> = {
   "Human Only": "#8c7346",
   "AI Only": "#9a9a9a",
-  HA: "#7c6199",
+  HA: "#3a9499",
 };
 const ALLOC_LABEL: Record<Allocation, string> = {
   "Human Only": "Human only",

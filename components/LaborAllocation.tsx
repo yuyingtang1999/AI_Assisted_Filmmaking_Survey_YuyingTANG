@@ -12,6 +12,7 @@ import {
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
 import AllocationMethod from "./AllocationMethod";
+import AllocationTimeline from "./AllocationTimeline";
 
 function counts(type: LaborType) {
   const c = { "Human Only": 0, HA: 0, "AI Only": 0 } as Record<Allocation, number>;
@@ -180,6 +181,20 @@ export default function LaborAllocation() {
           </div>
         </Reveal>
       </div>
+
+      <Reveal delay={70}>
+        <div className="mt-16">
+          <p className="label">Over time · RQ3</p>
+          <h3 className="t-h3 mt-2">How allocation shifted across the timeline</h3>
+          <p className="lede mt-2 max-w-2xl">
+            The same split, read year by year: as the corpus grew, where did
+            human–AI collaboration expand, and where did work stay human-only?
+          </p>
+          <div className="card mt-6 p-5 sm:p-7">
+            <AllocationTimeline />
+          </div>
+        </div>
+      </Reveal>
 
       <Reveal delay={80}>
         <div className="mt-10 rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-6">

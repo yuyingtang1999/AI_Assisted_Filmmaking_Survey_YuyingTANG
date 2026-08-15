@@ -43,8 +43,8 @@ export default function Hero() {
             <div className="mt-8">
               <p className="label text-[0.6rem]">Authors</p>
               <p className="mt-1 max-w-xl text-sm font-medium leading-relaxed text-[var(--fg)]">
-                Yuying Tang, Lin Gao, Haotian Li, Ziwei Wu, Baiqiao Zhang,
-                Rebecca Fiebrink, Sebastian Deterding, Xiaojuan Ma, and Huamin Qu
+                Yuying Tang, Lin Gao, Haotian Li, Baiqiao Zhang, Rebecca
+                Fiebrink, Sebastian Deterding, Xiaojuan Ma, and Huamin Qu
               </p>
               <p className="mt-3 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-[var(--faint)]">
                 {CORPUS.total} systems · through 2025
@@ -85,7 +85,7 @@ function LensMotif() {
   const STEPS = [
     { x: 116, color: "#df8a41", label: "Where", sub: "Sites", ys: [70, 122, 174, 226, 278] },
     { x: 200, color: "#5a9e64", label: "What", sub: "Types", ys: [96, 148, 200, 252] },
-    { x: 284, color: "#8c66ac", label: "How", sub: "Allocation", ys: [122, 174, 226] },
+    { x: 284, color: "#4d6cbb", label: "How", sub: "Allocation", ys: [122, 174, 226] },
   ];
 
   // connectors: every node linked to every node in the next step
