@@ -17,12 +17,17 @@ function buildCsv(): string {
       .filter((t) => p.allocation[t])
       .map((t) => `${t}=${p.allocation[t]}`)
       .join("; ");
+    // Cross-site papers list the specific labor sites they cover.
+    const laborSite =
+      p.site === "cross" && p.sites
+        ? `Cross-Site (${p.sites.map((s) => siteById(s).short).join(", ")})`
+        : siteById(p.site).short;
     return [
       String(p.id),
       p.name,
       p.venue,
       String(p.year),
-      siteById(p.site).short,
+      laborSite,
       p.laborTypes.join("; "),
       p.human.join("; "),
       p.ai.join("; "),

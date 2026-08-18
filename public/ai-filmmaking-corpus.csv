@@ -1,32 +1,32 @@
-ID,System,Venue,Year,Labor Site,Labor Types,Human Labor,AI Labor,URL
-1,Dramatron,CHI,2023,ATL Individual,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional; Structural,https://dl.acm.org/doi/10.1145/3544548.3581225
-2,TaleStream,UIST,2023,ATL Individual,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional; Meaning-Making,https://dl.acm.org/doi/10.1145/3586183.3606807
-3,ScriptViz,UIST,2024,ATL Individual,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,https://dl.acm.org/doi/10.1145/3654777.3676402
-4,CharacterMeet,CHI,2024,ATL Individual,Executional; Meaning-Making,Executional; Meaning-Making,Executional,https://dl.acm.org/doi/10.1145/3613904.3642105
-5,Drawing-in-Steps,IMX,2025,ATL Individual,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional,https://dl.acm.org/doi/10.1145/3706370.3727862
-6,MVPrompt,CHI,2025,ATL Individual,Executional; Structural; Meaning-Making,Executional; Meaning-Making,Executional; Structural; Meaning-Making,https://dl.acm.org/doi/10.1145/3706598.3713876
-7,Image-Based Texture,VRST,2021,BTL Individual,Executional,,Executional,https://dl.acm.org/doi/10.1145/3489849.3489854
-8,Optimization-based User Support,CHI,2021,BTL Individual,Executional,Executional,Executional,https://dl.acm.org/doi/10.1145/3411764.3445568
-9,Towards Context-aware Automatic,VRST,2021,BTL Individual,Executional,Executional,Executional,https://dl.acm.org/doi/10.1145/3489849.3489887
-10,Virtual Camera Layout Generation,CHI,2021,BTL Individual,Executional; Structural; Meaning-Making,Structural,Executional; Structural; Meaning-Making,https://dl.acm.org/doi/10.1145/3411764.3445437
-11,Real-Time Cinematic Tracking,GI,2021,BTL Individual,Executional,Executional,Executional,https://openreview.net/pdf?id=JpX53OXtp1r
-12,Mix3D,SUI,2022,BTL Individual,Executional; Structural,Executional; Structural,Executional; Structural,https://dl.acm.org/doi/10.1145/3565970.3567686
-13,Haptic Effects for Articulated Bodies,CHI,2023,BTL Individual,Executional,,Executional,https://dl.acm.org/doi/10.1145/3544548.3580727
-14,CurveCrafter,UIST,2023,BTL Individual,Executional,Executional,Executional,https://dl.acm.org/doi/10.1145/3586183.3606792
-15,Wakey-Wakey,UIST,2023,BTL Individual,Executional; Structural; Meaning-Making,Executional; Structural,Executional; Structural; Meaning-Making,https://dl.acm.org/doi/10.1145/3586183.3606813
-16,Merging Camera and Object,ISMAR,2023,BTL Individual,Executional,,Executional,https://ieeexplore.ieee.org/abstract/document/10316361?casa_token=1Q9j5S7SeNUAAAAA:SnnmfJ2mxiFaA-qXDc_5ck_3UC-vmX6kIesYJUmxakFacByKIE20j14cLdHWYao2RWpMy4ntd60
-17,Haptic Effects for General Scenes,ISMAR,2024,BTL Individual,Executional,,Executional,https://ieeexplore.ieee.org/abstract/document/10765446?casa_token=2njj3np5jPMAAAAA:0q7O4zhUqhDuSTKlLUfScG8iZOVv-LlFZlUcqwz77HJk1jMOuc7CZgr_6j9pG_XN_yq9busvaY0
-18,Sound Designer-Generative AI,CHI,2024,BTL Individual,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional,https://dl.acm.org/doi/10.1145/3613904.3642040
-19,HapMotion,IEEE VR,2024,BTL Individual,Executional,,Executional,https://link.springer.com/article/10.1007/s10055-023-00910-z
-20,DeepTreeSketch,CHI,2024,BTL Individual,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional,https://dl.acm.org/doi/10.1145/3613904.3642125
-21,XCam,CHI,2025,BTL Individual,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional,https://dl.acm.org/doi/10.1145/3706598.3713305
-22,GenTune,UIST,2025,BTL Individual,Executional; Meaning-Making,Executional; Meaning-Making,Executional,https://dl.acm.org/doi/10.1145/3746059.3747774
-23,AIdeation,CHI,2025,BTL Individual,Executional; Meaning-Making,Executional; Meaning-Making,Executional,https://dl.acm.org/doi/10.1145/3706598.3714148
-24,KinemaFX,UIST,2025,BTL Individual,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,https://dl.acm.org/doi/10.1145/3746059.3747734
-25,wr-AI-ter,IMX,2024,ATL Group,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,https://dl.acm.org/doi/10.1145/3639701.3656325
-26,CollageVis,CHI,2024,ATL Group,Executional; Structural; Meaning-Making; Relational,Executional; Structural; Meaning-Making; Relational,Executional,https://dl.acm.org/doi/10.1145/3613904.3642575
-27,CineVision,UIST,2025,ATL Group,Executional; Meaning-Making; Relational,Executional; Meaning-Making; Relational,Executional; Structural; Meaning-Making,https://dl.acm.org/doi/10.1145/3746059.3747793
-28,AniCraft,UIST,2024,BTL Group,Executional; Structural; Meaning-Making; Relational,Executional; Structural; Meaning-Making; Relational,Executional; Structural,https://dl.acm.org/doi/10.1145/3654777.3676325
-29,EditIQ,IUI,2025,BTL Group,Executional; Structural; Meaning-Making,,Executional; Structural; Meaning-Making,https://dl.acm.org/doi/10.1145/3708359.3712113
-30,Paratrouper,CHI,2025,Cross-Site,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional; Structural,https://dl.acm.org/doi/10.1145/3706598.3714242
-31,Understanding Creative Potential,IMX,2025,Cross-Site,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional,https://dl.acm.org/doi/10.1145/3706370.3727853
+ID,System,Venue,Year,Labor Site,Labor Types,Human Labor,AI Labor,Allocation,URL
+1,Dramatron,CHI,2023,ATL Individual,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional; Structural,Executional=HA; Structural=HA; Meaning-Making=Human Only,https://dl.acm.org/doi/10.1145/3544548.3581225
+2,TaleStream,UIST,2023,ATL Individual,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional; Meaning-Making,Executional=HA; Structural=Human Only; Meaning-Making=HA,https://dl.acm.org/doi/10.1145/3586183.3606807
+3,ScriptViz,UIST,2024,ATL Individual,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional=HA; Structural=HA; Meaning-Making=HA,https://dl.acm.org/doi/10.1145/3654777.3676402
+4,CharacterMeet,CHI,2024,ATL Individual,Executional; Meaning-Making,Executional; Meaning-Making,Executional,Executional=HA; Meaning-Making=Human Only,https://dl.acm.org/doi/10.1145/3613904.3642105
+5,Drawing-in-Steps,IMX,2025,ATL Individual,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional,Executional=HA; Structural=Human Only; Meaning-Making=Human Only,https://dl.acm.org/doi/10.1145/3706370.3727862
+6,MVPrompt,CHI,2025,ATL Individual,Executional; Structural; Meaning-Making,Executional; Meaning-Making,Executional; Structural; Meaning-Making,Executional=HA; Structural=AI Only; Meaning-Making=HA,https://dl.acm.org/doi/10.1145/3706598.3713876
+7,Image-Based Texture,VRST,2021,BTL Individual,Executional,,Executional,Executional=AI Only,https://dl.acm.org/doi/10.1145/3489849.3489854
+8,Optimization-based User Support,CHI,2021,BTL Individual,Executional,Executional,Executional,Executional=HA,https://dl.acm.org/doi/10.1145/3411764.3445568
+9,Towards Context-aware Automatic,VRST,2021,BTL Individual,Executional,Executional,Executional,Executional=HA,https://dl.acm.org/doi/10.1145/3489849.3489887
+10,Virtual Camera Layout Generation,CHI,2021,BTL Individual,Executional; Structural; Meaning-Making,Structural,Executional; Structural; Meaning-Making,Executional=AI Only; Structural=HA; Meaning-Making=AI Only,https://dl.acm.org/doi/10.1145/3411764.3445437
+11,Real-Time Cinematic Tracking,GI,2021,BTL Individual,Executional,Executional,Executional,Executional=HA,https://openreview.net/pdf?id=JpX53OXtp1r
+12,Mix3D,SUI,2022,BTL Individual,Executional; Structural,Executional; Structural,Executional; Structural,Executional=HA; Structural=HA,https://dl.acm.org/doi/10.1145/3565970.3567686
+13,Haptic Effects for Articulated Bodies,CHI,2023,BTL Individual,Executional,,Executional,Executional=AI Only,https://dl.acm.org/doi/10.1145/3544548.3580727
+14,CurveCrafter,UIST,2023,BTL Individual,Executional,Executional,Executional,Executional=HA,https://dl.acm.org/doi/10.1145/3586183.3606792
+15,Wakey-Wakey,UIST,2023,BTL Individual,Executional; Structural; Meaning-Making,Executional; Structural,Executional; Structural; Meaning-Making,Executional=HA; Structural=HA; Meaning-Making=AI Only,https://dl.acm.org/doi/10.1145/3586183.3606813
+16,Merging Camera and Object,ISMAR,2023,BTL Individual,Executional,,Executional,Executional=AI Only,https://ieeexplore.ieee.org/abstract/document/10316361?casa_token=1Q9j5S7SeNUAAAAA:SnnmfJ2mxiFaA-qXDc_5ck_3UC-vmX6kIesYJUmxakFacByKIE20j14cLdHWYao2RWpMy4ntd60
+17,Haptic Effects for General Scenes,ISMAR,2024,BTL Individual,Executional,,Executional,Executional=AI Only,https://ieeexplore.ieee.org/abstract/document/10765446?casa_token=2njj3np5jPMAAAAA:0q7O4zhUqhDuSTKlLUfScG8iZOVv-LlFZlUcqwz77HJk1jMOuc7CZgr_6j9pG_XN_yq9busvaY0
+18,Sound Designer-Generative AI,CHI,2024,BTL Individual,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional,Executional=HA; Structural=Human Only; Meaning-Making=Human Only,https://dl.acm.org/doi/10.1145/3613904.3642040
+19,HapMotion,IEEE VR,2024,BTL Individual,Executional,,Executional,Executional=AI Only,https://link.springer.com/article/10.1007/s10055-023-00910-z
+20,DeepTreeSketch,CHI,2024,BTL Individual,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional,Executional=HA; Structural=Human Only; Meaning-Making=Human Only,https://dl.acm.org/doi/10.1145/3613904.3642125
+21,XCam,CHI,2025,BTL Individual,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional,Executional=HA; Structural=Human Only; Meaning-Making=Human Only,https://dl.acm.org/doi/10.1145/3706598.3713305
+22,GenTune,UIST,2025,BTL Individual,Executional; Meaning-Making,Executional; Meaning-Making,Executional,Executional=HA; Meaning-Making=Human Only,https://dl.acm.org/doi/10.1145/3746059.3747774
+23,AIdeation,CHI,2025,BTL Individual,Executional; Meaning-Making,Executional; Meaning-Making,Executional,Executional=HA; Meaning-Making=Human Only,https://dl.acm.org/doi/10.1145/3706598.3714148
+24,KinemaFX,UIST,2025,BTL Individual,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional=HA; Structural=HA; Meaning-Making=HA,https://dl.acm.org/doi/10.1145/3746059.3747734
+25,wr-AI-ter,IMX,2024,ATL Group,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional=HA; Structural=HA; Meaning-Making=HA,https://dl.acm.org/doi/10.1145/3639701.3656325
+26,CollageVis,CHI,2024,ATL Group,Executional; Structural; Meaning-Making; Relational,Executional; Structural; Meaning-Making; Relational,Executional,Executional=HA; Structural=Human Only; Meaning-Making=Human Only; Relational=Human Only,https://dl.acm.org/doi/10.1145/3613904.3642575
+27,CineVision,UIST,2025,ATL Group,Executional; Structural; Meaning-Making; Relational,Executional; Meaning-Making; Relational,Executional; Structural; Meaning-Making,Executional=HA; Structural=AI Only; Meaning-Making=HA; Relational=Human Only,https://dl.acm.org/doi/10.1145/3746059.3747793
+28,AniCraft,UIST,2024,BTL Group,Executional; Structural; Meaning-Making; Relational,Executional; Structural; Meaning-Making; Relational,Executional; Structural,Executional=HA; Structural=HA; Meaning-Making=Human Only; Relational=Human Only,https://dl.acm.org/doi/10.1145/3654777.3676325
+29,EditIQ,IUI,2025,BTL Group,Executional; Structural; Meaning-Making,,Executional; Structural; Meaning-Making,Executional=AI Only; Structural=AI Only; Meaning-Making=AI Only,https://dl.acm.org/doi/10.1145/3708359.3712113
+30,Paratrouper,CHI,2025,"Cross-Site (ATL Individual, BTL Individual, BTL Group)",Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional; Structural,Executional=HA; Structural=HA; Meaning-Making=Human Only,https://dl.acm.org/doi/10.1145/3706598.3714242
+31,Understanding Creative Potential,IMX,2025,"Cross-Site (ATL Individual, ATL Group, BTL Individual, BTL Group)",Executional; Structural; Meaning-Making,Executional; Structural; Meaning-Making,Executional,Executional=HA; Structural=Human Only; Meaning-Making=Human Only,https://dl.acm.org/doi/10.1145/3706370.3727853
