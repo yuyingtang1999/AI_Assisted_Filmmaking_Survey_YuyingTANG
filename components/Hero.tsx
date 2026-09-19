@@ -20,7 +20,7 @@ export default function Hero() {
               A Research Survey
             </span>
 
-            <h1 className="font-display mt-7 text-[2.1rem] font-semibold leading-[1.08] tracking-[-0.01em] text-[var(--ink)] sm:text-[3.1rem]">
+            <h1 className="font-display mt-7 text-[1.9rem] font-semibold leading-[1.08] tracking-[-0.01em] text-[var(--ink)] sm:text-[2.9rem]">
               AI-Assisted Filmmaking from a Labor-Centered Perspective: A Survey of Systems in HCI Research
             </h1>
 
