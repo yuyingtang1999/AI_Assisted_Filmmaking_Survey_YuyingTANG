@@ -63,7 +63,7 @@ export default function Hero() {
 
       <button
         onClick={() =>
-          document.getElementById("framework")?.scrollIntoView({ behavior: "smooth" })
+          document.getElementById("taxonomy")?.scrollIntoView({ behavior: "smooth" })
         }
         className="mx-auto mt-6 flex w-max shrink-0 flex-col items-center gap-2 text-[var(--faint)] transition-colors hover:text-[var(--ink)]"
         style={{ animation: "floatY 2.6s ease-in-out infinite" }}

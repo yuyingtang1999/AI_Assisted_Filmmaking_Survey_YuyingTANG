@@ -8,11 +8,11 @@ import { useInView, useCountUp } from "./hooks";
 
 const LAYER_ACCENT = ["var(--atl-ind)", "var(--struct)", "var(--meaning)"];
 
-export default function Framework() {
+export default function Taxonomy() {
   return (
-    <section id="framework" className="relative mx-auto max-w-[var(--maxw)] px-6 py-28 sm:py-36">
+    <section id="taxonomy" className="relative mx-auto max-w-[var(--maxw)] px-6 py-28 sm:py-36">
       <SectionHeader
-        eyebrow="The Framework"
+        eyebrow="The Taxonomy"
         num="00"
         accent="var(--meaning)"
         title={

@@ -1,6 +1,6 @@
 import NavBar from "@/components/NavBar";
 import Hero from "@/components/Hero";
-import Framework from "@/components/Framework";
+import Taxonomy from "@/components/Framework";
 import LaborSites from "@/components/LaborSites";
 import LaborTypes from "@/components/LaborTypes";
 import LaborAllocation from "@/components/LaborAllocation";
@@ -15,7 +15,7 @@ export default function Home() {
       <NavBar />
       <main className="relative z-[2]">
         <Hero />
-        <Framework />
+        <Taxonomy />
         <LaborSites />
         <LaborTypes />
         <LaborAllocation />

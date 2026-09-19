@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 const LINKS = [
-  { id: "framework", label: "Framework" },
+  { id: "taxonomy", label: "Taxonomy" },
   { id: "sites", label: "Labor Sites" },
   { id: "types", label: "Labor Types" },
   { id: "allocation", label: "Labor Allocation" },
