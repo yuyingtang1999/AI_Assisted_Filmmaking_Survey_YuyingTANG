@@ -26,7 +26,7 @@ const mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title:
-    "Mapping the Labor Landscape of AI-Assisted Filmmaking — Yuying Tang",
+    "AI-Assisted Filmmaking from a Labor-Centered Perspective: A Survey of Systems in HCI Research — Yuying Tang",
   description:
     "A survey of AI-assisted filmmaking systems by Yuying Tang: labor sites, labor types, and human–AI labor allocation.",
 };
