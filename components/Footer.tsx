@@ -7,10 +7,10 @@ export default function Footer() {
             AI-Assisted Filmmaking from a Labor-Centered Perspective: A Survey of Systems in HCI Research
           </p>
           <p className="mt-1.5 text-sm text-[var(--muted)]">
-            Yuying Tang · Supervised by Prof. Huamin Qu &amp; Prof. Xiaojuan Ma
+            Yuying Tang
           </p>
         </div>
-        <p className="label">Survey corpus · 31 systems · through 2025</p>
+        <p className="label">Survey corpus · 31 systems</p>
       </div>
     </footer>
   );

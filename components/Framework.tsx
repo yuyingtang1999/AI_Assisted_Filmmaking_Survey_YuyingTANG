@@ -17,14 +17,14 @@ export default function Taxonomy() {
         accent="var(--meaning)"
         title={
           <>
-            A three-layer <em>taxonomy</em> for reading AI in film
+            A three-layer <em>taxonomy</em> 
           </>
         }
       >
         <p className="lede">
-          The survey reads {CORPUS.total} AI-assisted filmmaking systems —
+          The survey includes {CORPUS.total} AI-assisted filmmaking systems —
           concentrated in {CORPUS.venues}, rising to a peak in {CORPUS.peak} —
-          through three stacked questions. Each layer sharpens the last: from{" "}
+          through three research questions. Each layer sharpens the last: from{" "}
           <em className="font-display italic text-[var(--fg)]">where</em>{" "}
           assistance lives, to{" "}
           <em className="font-display italic text-[var(--fg)]">what</em> labor it

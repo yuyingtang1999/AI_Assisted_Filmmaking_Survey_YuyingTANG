@@ -69,8 +69,8 @@ export default function NavBar() {
             </svg>
           </span>
           <span className="font-display text-[0.95rem] font-medium tracking-tight">
-            The Labor Landscape{" "}
-            <span className="italic text-[var(--muted)]">of AI-Assisted Filmmaking</span>
+            A Survey of{" "}
+            <span className="italic text-[var(--muted)]">AI-Assisted Filmmaking</span>
           </span>
         </button>
 
